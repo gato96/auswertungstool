@@ -52,6 +52,8 @@ let verkehrsmittelWeg2 = new Array();
 
 let aktuellesElement = [];
 
+var hilfs = true;
+
 //Beginn Funktionen
 async function vergleicheWege() {
 
@@ -60,10 +62,7 @@ async function vergleicheWege() {
     console.log("Bilde Wegepaare");
     wegeIDVglWegepaare = bildeWegepaare();
     console.log("wegeIDVglWegepaare");
-    /*var hilfs = true
-    while(hilfs) {
-        hilfs = !(anzahlfiles == wegeIDVglWegepaare.length)
-    }*/
+
     console.log(wegeIDVglWegepaare);
 
     //Beginn Vergleiche
@@ -85,7 +84,12 @@ async function vergleicheWege() {
      */
 
     console.log("Vergleich Verkehrsmittel");
-    wegeIDVglWegepaare = vergleicheVerkehrsmittel(wegeIDVglWegepaare);
+    wegeIDVglWegepaare = await vergleicheVerkehrsmittel(wegeIDVglWegepaare);
+
+    /*while(hilfs) {
+        //hilfs = !(anzahlfiles == wegeIDVglVerkehrsmittel.length)
+    }    */
+
     console.log("Ende Vergleich Verkehrsmittel");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
@@ -365,7 +369,7 @@ function vergleicheWegezweck(wegeIDVglWegepaare){
 
 var resolvedFlag = false;
 
-function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
+async function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
 
     //Vergleich Verkehrsmittel
     // nehme ersten Weg und suche passenden Weg mit gleichem Verkehrsmittel
@@ -389,6 +393,8 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
     var wS1 = false;
     var wS2 = false;
 
+
+    await t();
 
     //wegeIDVglWegezweck.forEach(function(element){
 
@@ -435,15 +441,15 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
 
 async function leseFile(wegeID1, wegeID2, vmVgl, wS1, wS2, durchlaufeneFiles, filesVM, anzahlFiles, key) {
 
-    return new Promise((resolve,reject)=>{
-        //here our function should be implemented
-        setTimeout(()=>{
-            console.log("Hello from inside the testAsync function vglVM");
+
+
 
             // read selected JSON Files
             for(file of filesVM) {
+               console.log("in for file of files");
                 let readerVM = new FileReader();
-                ppp: Promise = readerVM.onload = async function (f) {
+                readerVM.onload = async function (f) {
+                    console.log("in readerVM.onload");
                     let content = JSON.parse(f.target.result);
 
                     //verkehrsmittelWeg1 = [];
@@ -528,24 +534,24 @@ async function leseFile(wegeID1, wegeID2, vmVgl, wS1, wS2, durchlaufeneFiles, fi
                         endeRead(wegeID1, wegeID2, aktuellesElement);
 
                         if (Object.is(wegeIDVglWegepaare.length - 1, key)) {
+                            console.log("Ende!!");
+                            hilfs = false;
                             endeVglVM();
+
                         }
 
 
                     }
 
                 }
-                ppp.
+
                 readerVM.readAsText(file);
             }
 
 
 
 
-            resolve();
-            ;} , 5000
-        );
-    });
+
 
 
 }
