@@ -20,6 +20,22 @@ for (var i = 0; i < wegedaten.length; i++) {
 
 }
 
+// Array wegedatenVerkehrsmittel erstellen
+var wegedatenVerkehrsmittel = new Array();
+for (var i = 0; i < wegedatenVerkehrsmittel.length; i++) {
+    wegedatenVerkehrsmittel[i] = new Array(1);
+    wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
+// Array wegedatenKoordinaten erstellen
+var wegedatenKoordinaten = new Array();
+for (var i = 0; i < wegedatenKoordinaten.length; i++) {
+    wegedatenKoordinaten[i] = new Array(1);
+    wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
 // Array Anzahl Wege pro User
 var anzahlWegeUser = new Array();
 for (var j = 0; j < anzahlWegeUser.length; j++) {
@@ -93,10 +109,67 @@ function readJSONFunction() {
             wegedaten[zaehlerWegedaten]["Dauer"] = content[0]["a2_duration"];
             wegedaten[zaehlerWegedaten]["Distanz"] = content[0]["a3_distance"];
 
-            zaehlerWegedaten = zaehlerWegedaten +1;
-
-            // looping through wayStages
+            // wayStages einlesen
             let wayStage = (content[0]["a5_wayStages"])
+
+
+            //Array wegedatenVerkehrsmittel einlesen
+            wegedatenVerkehrsmittel[zaehlerWegedaten] = new Array();
+            wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var i = 0; i < wayStage.length; i++) {
+                wegedatenVerkehrsmittel[zaehlerWegedaten].push(wayStage[i]["a0_mode"]);
+
+            }
+            console.log(wegedatenVerkehrsmittel);
+
+            //Array wegedatenKoordinaten einlesen
+            wegedatenKoordinaten[zaehlerWegedaten] = new Array();
+            wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var i = 0; i < wayStage.length; i++) {
+
+                let cor = (wayStage[i]["a3_coordinatesList"]);
+
+                var lat0 = 0;
+                var lng0 = 0;
+                var latanzC = 0;
+                var lnganzC = 0;
+
+                for (var c = 0; c < cor.length; c++){
+
+                    //erste Koordinaten eines WayStages speichern
+                    if(c == 0){
+                        lat0 = cor[c]["coordinate_lat"];
+                        lng0 = cor[c]["coordinate_lng"];
+
+                    }
+
+                    //letzte Koordinaten eines WayStages speichern
+                    if(c == cor.length-1){
+                        latanzC = cor[c]["coordinate_lat"];
+                        lnganzC = cor[c]["coordinate_lng"];
+
+                    }
+
+                }
+
+                //console.log("lat[0]: " + lat0);
+                //console.log("lng[0]: " + lng0);
+
+                //console.log("lat[anzC]: " + latanzC);
+                //console.log("lng[anzC]: " + lnganzC);
+
+                wegedatenKoordinaten[zaehlerWegedaten].push(lat0);
+                wegedatenKoordinaten[zaehlerWegedaten].push(lng0);
+                wegedatenKoordinaten[zaehlerWegedaten].push(latanzC);
+                wegedatenKoordinaten[zaehlerWegedaten].push(lnganzC);
+
+            }
+            console.log(wegedatenKoordinaten);
+
+
+            //zaehlerWegedaten erhöhen
+            zaehlerWegedaten = zaehlerWegedaten + 1;
+
 
             // Hilfsvariablen, damit WegeId bei den Verkehrsmitteln nur einmal gespeichert wird
             var hilfFuss = false;
@@ -381,7 +454,7 @@ function auswahlFilter() {
             case "Wege vergleichen":
                 if(checkboxesFilter[i].checked){
                     // Anzeige der Auswahl der Nutzertypen
-                    vergleicheWege();}
+                    auswahlVglKriterien();}
                 break;
             default:
                 break;
@@ -1156,6 +1229,7 @@ function zeichneWeg(wegeID, verkehrsmittel){
 
                     let vmA = "";
                     var alleWayStages = "";
+                    var f = 0;
 
                     // looping though coordinatesList
                     for (var i = 0; i < wayStage.length; i++) {
@@ -1168,20 +1242,40 @@ function zeichneWeg(wegeID, verkehrsmittel){
                         var lng ;
 
 
+                        var zaehler = "";
+
+                        for(var c = 0; c < wegedatenKoordinaten.length; c++){
+                            if(aktuelleWegeId == wegedatenKoordinaten[c]["WegeID"]){
+                                zaehler = c;
+                            }
+                        }
+
                         for (var c = 0; c < cor.length; c++){
-                            anzC = anzC + 1;
                             lat = cor[c]["coordinate_lat"];
                             lng = cor[c]["coordinate_lng"];
                             coordinates_lat.push(lat);
                             coordinates_lng.push(lng);
+                            anzC = anzC + 1;
                         }
                         console.log(anzC);
-                        var anzC1 = anzC - 1;
+
+                        /*var anzC1 = anzC - 1;
                         var aLatN = coordinates_lat[0];
                         var aLngN = coordinates_lng[0];
 
                         var aLatL = coordinates_lat[anzC1];
                         var aLngL = coordinates_lng[anzC1];
+
+                         */
+
+                        var aLatN = wegedatenKoordinaten[zaehler][f];
+                        var aLngN = wegedatenKoordinaten[zaehler][f+1];
+
+                        var aLatL = wegedatenKoordinaten[zaehler][f+2];
+                        var aLngL = wegedatenKoordinaten[zaehler][f+3];
+
+                        f = f + 4;
+
 
                         console.log("lat[0]: " + aLatN);
                         console.log("lng[0]: " + aLngN);

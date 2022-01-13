@@ -51,6 +51,13 @@
             width: 50%;
             box-sizing: border-box;
         }
+        .box7 {
+            display: none;
+            float: left;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
         #map {
             position: absolute;
             top: 0;
@@ -311,6 +318,27 @@
     <p><b>Dargestellte Wege </b></p>
 
     <output id="Ausgabe" ></output>
+</div>
+
+<div class="box7" id="box7">
+
+    <p>Maximale Abweichung Koordinaten (in Metern): </p>
+    <input type="text" id="maxAbweichung" name="maxAbweichung" value="1000">
+
+    <p>Maximale Abweichung Startzeit (hh:mm:ss): </p>
+    <p></p>
+    <input id="startzeitraumStu" type="number" min="0" max="23" step="1" value="1" >
+    :
+    <input id="startzeitraumMin" type="number" min="0" max="59" step="1" value="0" >
+    :
+    <input id="startzeitraumSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
+
+    <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
+
+
+
 </div>
 
 <!-- Map Object (rechts)-->
