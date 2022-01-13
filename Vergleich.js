@@ -389,6 +389,8 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
     var wS1 = false;
     var wS2 = false;
 
+    t()
+
 
     //wegeIDVglWegezweck.forEach(function(element){
 
@@ -437,13 +439,13 @@ async function leseFile(wegeID1, wegeID2, vmVgl, wS1, wS2, durchlaufeneFiles, fi
 
     return new Promise((resolve,reject)=>{
         //here our function should be implemented
-        setTimeout(()=>{
+        setTimeout(()=>async function(){
             console.log("Hello from inside the testAsync function vglVM");
 
             // read selected JSON Files
             for(file of filesVM) {
                 let readerVM = new FileReader();
-                ppp: Promise = readerVM.onload = async function (f) {
+                await readerVM.onload = async function (f) {
                     let content = JSON.parse(f.target.result);
 
                     //verkehrsmittelWeg1 = [];
@@ -535,7 +537,6 @@ async function leseFile(wegeID1, wegeID2, vmVgl, wS1, wS2, durchlaufeneFiles, fi
                     }
 
                 }
-                ppp.
                 readerVM.readAsText(file);
             }
 
