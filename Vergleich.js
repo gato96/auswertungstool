@@ -46,13 +46,8 @@ for (var a = 0; a < wegeIDVglWegepaare.length; a++) {
     wegeIDVglWegepaare[zaehler]["WegeID 2"] = "";
 }
 
-let verkehrsmittelWeg1 = new Array();
+var wegeIDVglAusgabe = new Array();
 
-let verkehrsmittelWeg2 = new Array();
-
-let aktuellesElement = [];
-
-var hilfs = true;
 
 //Beginn Funktionen
 
@@ -101,8 +96,16 @@ function vergleicheWege() {
     console.log("Ende aller Vergleiche");
     //Ende Vergleiche
 
-    //TODO Ausgabe Wege
-    //TODO zeichne Wege
+    //Ausgabe der auf Karte und Ausgabe Wegeinformationen
+
+    console.log("Anzeige und Ausgabe Wegedaten");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+
+    zeichneWegVgl(wegeIDVglWegepaare);
+
+
 
 } //Ende vergleicheWege()
 
@@ -164,17 +167,6 @@ function bildeWegepaare() {
 
     }
 
-
-
-    /* //speichere nur ein Wegepaar mit den gleichen beiden Wegen
-       //funktioniert nicht
-     for(var b = 0; b < wegeIDVgl.length-1; b = b + zaehlVgl){
-         wegeIDVglEinfach.push(wegeIDVgl[b]);
-
-     }
-
-     */
-
     console.log("wegeIDVgl");
     console.log(wegeIDVgl);
     console.log("wegeIDVglEinfach");
@@ -189,10 +181,7 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
     //Vergleich Koordinaten
     // GPS-Koordinaten
     // nehme ersten Weg und suche passenden Weg in bestimmtem Durchmesser (?), Start, Ziel, Verkehrsmittelwechsel
-    //TODO Vergleich Koordinaten sichtbare Kommentare verschönern
     //TODO Vergleich Koordinaten Festlegung Koordinatenbereich
-    //TODO Vergleich Koordinaten sichtbare log-Ausgaben verschönern
-
 
     wegeIDVglWegepaare.forEach(function(element){
 
@@ -221,9 +210,13 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
         console.log("weg2Zaehler");
         console.log(weg2Zaehler);
 
+        console.log("wegedatenKoordinaten[weg1Zaehler]");
         console.log(wegedatenKoordinaten[weg1Zaehler]);
+        console.log("wegedatenKoordinaten[weg1Zaehler].length");
         console.log(wegedatenKoordinaten[weg1Zaehler].length);
         console.log(wegedatenKoordinaten[weg2Zaehler]);
+        console.log("wegedatenKoordinaten[weg2Zaehler]");
+        console.log("wegedatenKoordinaten[weg2Zaehler].length");
         console.log(wegedatenKoordinaten[weg2Zaehler].length);
 
         var vmGleichZ = 0;
@@ -275,25 +268,10 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
 
 function vergleichsFunktion(lat1, lon1, lat2, lon2, maxLaenge){
 
-    /*var lat1 = 49.00380085;
-var lon1 = 8.34454316;
-var lat2 = 49.01084452;
-var lon2 = 8.37611017;
-
- */
-
-    /*var lat1 = 49.00380085;
-    var lon1 = 8.34454316;
-    var lat2 = 49.00151027;
-    var lon2 = 8.34511168;
-
-    var maxLaenge = 1000;
-
-     */
-
     var kooGleich = false;
-    const R = 6371e3; // metres
-    const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+
+    const R = 6371e3; // Meter
+    const φ1 = lat1 * Math.PI/180; // φ, λ in radian
     const φ2 = lat2 * Math.PI/180;
     const Δφ = (lat2-lat1) * Math.PI/180;
     const Δλ = (lon2-lon1) * Math.PI/180;
@@ -303,7 +281,7 @@ var lon2 = 8.37611017;
         Math.sin(Δλ/2) * Math.sin(Δλ/2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-    const d = R * c; // in metres
+    const d = R * c; // in Metern
 
 
     console.log("Distanz in Metern");
@@ -557,3 +535,221 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
 
     return wegeIDVglVerkehrsmittel;
 } //Ende vergleiche Verkehrsmittel()
+
+function zeichneWegVgl(wegeIDVglWegepaare){
+
+    // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
+    document.getElementById("box6").style.display = "block";
+
+    // alle Verkehrsmittel dem Array verkehrsmittel hinzufügen
+    var verkehrsmittel = new Array();
+    verkehrsmittel = ['zu Fuß', 'Fahrrad', 'Bus', 'Straßenbahn', 'S-Bahn', 'U-Bahn', 'Schiff/ Fähre', 'Auto (Fahrer)', 'Auto (Mitfahrer)', 'Reisebus', 'Flugzeug', 'Fernbus', 'Taxi'];
+
+    wegeIDVglWegepaare.forEach(function(element,index){
+
+        var wegeID1 = element["WegeID 1"];
+        var wegeID2 = element["WegeID 2"];
+
+        console.log(index);
+
+        // Füge neue wegeID dem Array wegeIDVglAusgabe hinzu (Array wegeIDVglAusgabe noch leer)
+        if(wegeIDVglAusgabe.length == 0){
+            wegeIDVglAusgabe.push(wegeID1);
+            wegeIDVglAusgabe.push(wegeID2);
+        }
+
+        var hilf1 = false;
+        var hilf2 = false;
+
+        // Wenn neue wegeID noch nicht im Array wegeIDVglAusgabe enthalten ist füge neue wegeID hinzu
+
+        wegeIDVglAusgabe.forEach(function(element) {
+            if(element == wegeID1){
+                hilf1 = true;
+            }
+            if(element == wegeID2){
+                hilf2 = true;
+            }
+        });
+
+        if(hilf1 == false){
+            wegeIDVglAusgabe.push(wegeID1);
+        }
+        if(hilf2 == false){
+            wegeIDVglAusgabe.push(wegeID2);
+        }
+
+        // Ausgabe Wegepaare
+        var wegepaarNeu = "<b class='content'>Wegepaar: </b>" + "<span class='content'>"+ index +"</span>" +
+            "<br class='content'>WegeID 1: </br>" + "<span class='content'>" + wegeID1 +"</span>" +
+            "<br class='content'>WegeID 2: </br>" + "<span class='content'>" + wegeID2 +"</span>" + "<p></p>";
+        var sel = document.getElementById("Ausgabe");
+        var wegepaar = document.createElement('Wegepaar');
+        wegepaar.innerHTML = wegepaarNeu;
+        wegepaar.value = wegepaarNeu;
+        sel.appendChild(wegepaar);
+
+
+    });
+
+    console.log("wegeIDVglAusgabe");
+    console.log(wegeIDVglAusgabe);
+
+    // load selected JSON Files
+    let filesAuswahl = document.getElementById("jsonFiles").files;
+
+    var ausgabe_data = new Array();
+
+    // read selected JSON Files
+    for(file of filesAuswahl) {
+        let readerAuswahl = new FileReader();
+        readerAuswahl.onload = function (f) {
+            let content = JSON.parse(f.target.result);
+
+            // Speichere akutelle WegeID
+            var aktuelleWegeId = content[0]["a0_wayUUID"];
+
+            // gehe durch Array wegeIDVglAusgabe (alle gefilterten wegeIDs)
+            for(var a = 0; a < wegeIDVglAusgabe.length; a++){
+
+                // wenn aktueller Weg in wegeIDVglAusgabe enthalten gehe weiter
+                if(wegeIDVglAusgabe[a] == aktuelleWegeId){
+
+                    // looping through wayStages
+                    let wayStage = (content[0]["a5_wayStages"])
+                    //console.log(wayStage)
+
+                    let vmA = "";
+                    var alleWayStages = "";
+                    var f = 0;
+
+                    // looping though coordinatesList
+                    for (var i = 0; i < wayStage.length; i++) {
+
+                        //neu
+                        let cor = (wayStage[i]["a3_coordinatesList"])
+
+                        anzC = 0;
+                        var lat ;
+                        var lng ;
+
+
+                        var zaehler = "";
+
+                        for(var c = 0; c < wegedatenKoordinaten.length; c++){
+                            if(aktuelleWegeId == wegedatenKoordinaten[c]["WegeID"]){
+                                zaehler = c;
+                            }
+                        }
+
+                        for (var c = 0; c < cor.length; c++){
+                            lat = cor[c]["coordinate_lat"];
+                            lng = cor[c]["coordinate_lng"];
+                            coordinates_lat.push(lat);
+                            coordinates_lng.push(lng);
+                            anzC = anzC + 1;
+                        }
+                        console.log(anzC);
+
+                        /*var anzC1 = anzC - 1;
+                        var aLatN = coordinates_lat[0];
+                        var aLngN = coordinates_lng[0];
+
+                        var aLatL = coordinates_lat[anzC1];
+                        var aLngL = coordinates_lng[anzC1];
+
+                         */
+
+                        var aLatN = wegedatenKoordinaten[zaehler][f];
+                        var aLngN = wegedatenKoordinaten[zaehler][f+1];
+
+                        var aLatL = wegedatenKoordinaten[zaehler][f+2];
+                        var aLngL = wegedatenKoordinaten[zaehler][f+3];
+
+                        f = f + 4;
+
+
+                        console.log("lat[0]: " + aLatN);
+                        console.log("lng[0]: " + aLngN);
+
+                        console.log("lat[anzC]: " + aLatL);
+                        console.log("lng[anzC]: " + aLngL);
+
+                        //Ende-neu
+
+                        // speichere Verkehrsmittel der Etappe/wayStage
+                        let vm = (wayStage[i]["a0_mode"]);
+
+                        for(var b = 0; b < verkehrsmittel.length; b++){
+                            if(verkehrsmittel[b] == vm){
+                                // wenn Verkehrsmittel im Filter gesetzt wurde und mit Verkehrsmittel des wayStages übereinstimmt zeichne Weg
+
+                                var coordinateTuples = []
+                                if (wayStage[i]["a3_coordinatesList"] !== undefined) {
+                                    let coordinate = (wayStage[i]["a3_coordinatesList"])
+
+                                    var farbe = "";
+
+                                    // adding pairs of coordinates to list
+                                    for (var j = 0; j < coordinate.length; j++) {
+                                        coordinateTuples.push([coordinate[j]['coordinate_lat'], coordinate[j]['coordinate_lng']]);
+                                    }
+
+                                    // polyline random color picker
+                                    function get_random_color() {
+                                        var letters = '0123456789ABCDEF'.split('');
+                                        var color = '#';
+                                        for (var k = 0; k < 6; k++) {
+                                            color += letters[Math.round(Math.random() * 15)];
+                                        }
+                                        farbe = color;
+                                        return color;
+                                    }
+
+                                    // creating poly line options
+                                    var polyLineOptions = {color: get_random_color()};
+                                    // creating polyline
+                                    var polyline = L.polyline(coordinateTuples, polyLineOptions);
+                                    // adding multi poly-line to map
+                                    polyline.addTo(map);
+
+                                    // speichere Wegeinfo für Ausgabe
+
+                                    var einWayStage =  "<span class='test' style='color:" + farbe+ ";'><br><b class='content'>WayStage: </b>" + "<span class='content'>"+ i +
+                                        "</span>"+ "<br><span class='content'>Verkehrsmittel: </span>" + "<span class='content'>"+ wayStage[i]["a0_mode"] +"</span>" +
+                                        "<br><span class='content'>Dauer: </span>" + "<span class='content'>"+ wayStage[i]["a1_duration"] +"</span>"+
+                                        "<br><span class='content'>Distanz: </span>" + "<span class='content'>"+ wayStage[i]["a2_distance"] +"</span>"+
+                                        "<br><span class='content'>lat[0]: </span>" + "<span class='content'>"+ aLatN +"</span>" +
+                                        "<br><span class='content'>lng[0]: </span>" + "<span class='content'>"+ aLngN +"</span>" + "<br><span class='content'>lat[anzC]: </span>" +
+                                        "<span class='content'>"+ aLatL +"</span>" + "<br><span class='content'>lng[anzC]: </span>" + "<span class='content'>"+ aLngL +"</span></span>" ;
+
+                                    console.log("Farbe" + farbe);
+                                    //console.log(einWayStage);
+
+                                    alleWayStages = alleWayStages + einWayStage;
+
+                                }
+                            }
+                        }
+                    }
+
+                    // Ausgabe mit Wegedaten des gezeichneten Weges befüllen
+                    var wegeInfo = "<b class='content'>WegeID: </b>" + "<span class='content'>"+ content[0]["a0_wayUUID"] +"</span>" +
+                        "<br><b class='content'>NutzerID: </b>" + "<span class='content'>" + content[0]["a6_userID"] +"</span>" +
+                        "<br><b class='content'>Wegezweck: </b>" + "<span class='content'>" +content[0]["a4_purpose"]  +"</span>" +
+                        "<br><b class='content'>Start: </b>" + "<span class='content'>"+ content[0]["a1_startTime"] +"</span>" +
+                        "<br><b class='content'>Dauer: </b>" + "<span class='content'>"+content[0]["a2_duration"] +"</span>" +
+                        "<br><b class='content'>Distanz: </b>" + "<span class='content'>"+ content[0]["a3_distance"] +
+                        "</span>" + "<br><b class='content'>WayStages: </b>" + alleWayStages + "<p></p>";
+                    var sel = document.getElementById("Ausgabe");
+                    var weg = document.createElement('Weg');
+                    weg.innerHTML = wegeInfo;
+                    weg.value = wegeInfo;
+                    sel.appendChild(weg);
+                }
+            }
+        }
+        readerAuswahl.readAsText(file);
+    }
+
+} // Ende zeichneWegVgl()
