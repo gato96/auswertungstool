@@ -336,6 +336,20 @@
     <input id="startzeitraumSec" type="number" min="0" max="59" step="1" value="0" >
     <p></p>
 
+    <p>Maximale Abweichung Koordinaten am Umstiegsort (in Metern): </p>
+    <p>(Vergleich Distanz Punkt A zu Punkt B zwischen beiden Wegen) </p>
+    <input type="text" id="maxAbweichungUmstieg" name="maxAbweichungUmstieg" value="500">
+
+    <p>Maximale Abweichung der Umstiegszeit zwischen den WayStages (hh:mm:ss): </p>
+    <p>(Vergleich Ankunftszeit Punkt A zu Abfahrtszeit Punkt B zwischen beiden Wegen) </p>
+    <p></p>
+    <input id="umstiegszeitStu" type="number" min="0" max="23" step="1" value="0" >
+    :
+    <input id="umstiegszeitMin" type="number" min="0" max="59" step="1" value="30" >
+    :
+    <input id="umstiegszeitSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
 
     <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
 

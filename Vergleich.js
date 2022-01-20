@@ -1,49 +1,74 @@
 //Definition Arrays
 var wegeIDVgl = new Array();
 for (var j = 0; j < wegeIDVgl.length; j++) {
-    wegeIDVgl[j] = new Array(2);
+    wegeIDVgl[j] = new Array(3);
     wegeIDVgl[zaehler]["WegeID 1"] = "";
     wegeIDVgl[zaehler]["WegeID 2"] = "";
+    wegeIDVgl[zaehler]["UserID"] = "";
+
 }
 var wegeIDVglEinfach = new Array();
 for (var a = 0; a < wegeIDVglEinfach.length; a++) {
-    wegeIDVglEinfach[a] = new Array(2);
+    wegeIDVglEinfach[a] = new Array(3);
     wegeIDVglEinfach[zaehler]["WegeID 1"] = "";
     wegeIDVglEinfach[zaehler]["WegeID 2"] = "";
+    wegeIDVglEinfach[zaehler]["UserID"] = "";
 }
 
 var wegeIDVglStartzeit = new Array();
 for (var d = 0; d < wegeIDVglStartzeit.length; d++) {
-    wegeIDVglStartzeit[d] = new Array(2);
+    wegeIDVglStartzeit[d] = new Array(3);
     wegeIDVglStartzeit[zaehler]["WegeID 1"] = "";
     wegeIDVglStartzeit[zaehler]["WegeID 2"] = "";
+    wegeIDVglStartzeit[zaehler]["UserID"] = "";
+}
+
+var wegeIDVglDauerUmstieg = new Array();
+for (var c = 0; c < wegeIDVglDauerUmstieg.length; c++) {
+    wegeIDVglDauerUmstieg[c] = new Array(3);
+    wegeIDVglDauerUmstieg[zaehler]["WegeID 1"] = "";
+    wegeIDVglDauerUmstieg[zaehler]["WegeID 2"] = "";
+    wegeIDVglDauerUmstieg[zaehler]["UserID"] = "";
 }
 
 var wegeIDVglKoordinaten = new Array();
 for (var g = 0; g < wegeIDVglKoordinaten.length; g++) {
-    wegeIDVglKoordinaten[g] = new Array(2);
+    wegeIDVglKoordinaten[g] = new Array(3);
     wegeIDVglKoordinaten[zaehler]["WegeID 1"] = "";
     wegeIDVglKoordinaten[zaehler]["WegeID 2"] = "";
+    wegeIDVglKoordinaten[zaehler]["UserID"] = "";
+}
+
+var wegeIDVglKoordinatenUmstieg = new Array();
+for (var c = 0; c < wegeIDVglKoordinatenUmstieg.length; c++) {
+    wegeIDVglKoordinatenUmstieg[c] = new Array(3);
+    wegeIDVglKoordinatenUmstieg[zaehler]["WegeID 1"] = "";
+    wegeIDVglKoordinatenUmstieg[zaehler]["WegeID 2"] = "";
+    wegeIDVglKoordinatenUmstieg[zaehler]["UserID"] = "";
 }
 
 var wegeIDVglWegezweck = new Array();
 for (var b = 0; b < wegeIDVglWegezweck.length; b++) {
-    wegeIDVglWegezweck[b] = new Array(2);
+    wegeIDVglWegezweck[b] = new Array(3);
     wegeIDVglWegezweck[zaehler]["WegeID 1"] = "";
     wegeIDVglWegezweck[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegezweck[zaehler]["UserID"] = "";
 }
 var wegeIDVglVerkehrsmittel = new Array();
 for (var c = 0; c < wegeIDVglVerkehrsmittel.length; c++) {
-    wegeIDVglVerkehrsmittel[c] = new Array(2);
+    wegeIDVglVerkehrsmittel[c] = new Array(3);
     wegeIDVglVerkehrsmittel[zaehler]["WegeID 1"] = "";
     wegeIDVglVerkehrsmittel[zaehler]["WegeID 2"] = "";
+    wegeIDVglVerkehrsmittel[zaehler]["UserID"] = "";
 }
+
 
 var wegeIDVglWegepaare = new Array();
 for (var a = 0; a < wegeIDVglWegepaare.length; a++) {
-    wegeIDVglWegepaare[a] = new Array(2);
+    wegeIDVglWegepaare[a] = new Array(3);
     wegeIDVglWegepaare[zaehler]["WegeID 1"] = "";
     wegeIDVglWegepaare[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegepaare[zaehler]["UserID"] = "";
 }
 
 var wegeIDVglAusgabe = new Array();
@@ -68,9 +93,15 @@ function vergleicheWege() {
 
     //Beginn Vergleiche
 
-    console.log("Vergleich Koordinaten");
+    /*console.log("Vergleich Koordinaten");
     wegeIDVglWegepaare = vergleicheKoordinaten(wegeIDVglWegepaare);
     console.log("Ende Vergleich Koordinaten");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    console.log("Vergleich Koordinaten Umstieg");
+    wegeIDVglWegepaare = vergleicheKoordinatenUmstieg(wegeIDVglWegepaare);
+    console.log("Ende Vergleich Koordinaten Umstieg");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
@@ -80,7 +111,15 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-    console.log("Vergleich Wegezweck");
+     */
+
+    console.log("Vergleich Umstiegszeit");
+    wegeIDVglWegepaare =  vergleicheUmstiegszeit(wegeIDVglWegepaare);
+    console.log("Ende Vergleich Umstiegszeit");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    /*console.log("Vergleich Wegezweck");
     wegeIDVglWegepaare =  vergleicheWegezweck(wegeIDVglWegepaare);
     console.log("Ende Vergleich Wegezweck");
     console.log("wegeIDVglWegepaare");
@@ -91,6 +130,8 @@ function vergleicheWege() {
     console.log("Ende Vergleich Verkehrsmittel");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
+
+     */
 
 
     console.log("Ende aller Vergleiche");
@@ -116,22 +157,48 @@ function bildeWegepaare() {
     wegeIDVgl[zaehler] = new Array();
     wegeIDVgl[zaehler]["WegeID 1"] = "";
     wegeIDVgl[zaehler]["WegeID 2"] = "";
+    wegeIDVgl[zaehler]["UserID"] = "";
 
     wegedaten.forEach(function(element){
 
         for(var i = 0; i < wegedaten.length; i++){
 
-            if(element["UserID"] == wegedaten[i]["UserID"]){ //? nicht für 2020 und 2018
+            if(element["UserID"] == wegedaten[i]["UserID"]){
 
                 if(element["WegeID"] != wegedaten[i]["WegeID"]){
 
-                    console.log("Eintrag");
+                    console.log("Wegepaar mit gleicher UserID");
                     wegeIDVgl[zaehler] = new Array();
                     wegeIDVgl[zaehler]["WegeID 1"] = element["WegeID"];
                     wegeIDVgl[zaehler]["WegeID 2"] = wegedaten[i]["WegeID"];
+                    wegeIDVgl[zaehler]["UserID"] = "Wegepaar mit gleicher UserID";
+
                     zaehler = zaehler + 1;
 
                 }
+
+            } else {
+
+                //TODO element["UserID"] == undefined prüfen, ob if angesprochen wird
+                if(element["UserID"] == undefined){
+                    console.log("UserID nicht vorhanden");
+                    wegeIDVgl[zaehler] = new Array();
+                    wegeIDVgl[zaehler]["WegeID 1"] = element["WegeID"];
+                    wegeIDVgl[zaehler]["WegeID 2"] = wegedaten[i]["WegeID"];
+                    wegeIDVgl[zaehler]["UserID"] = "UserID nicht vorhanden";
+
+                    zaehler = zaehler + 1;
+
+                } else {
+                    console.log("UserID stimmt nicht überein");
+                    wegeIDVgl[zaehler] = new Array();
+                    wegeIDVgl[zaehler]["WegeID 1"] = element["WegeID"];
+                    wegeIDVgl[zaehler]["WegeID 2"] = wegedaten[i]["WegeID"];
+                    wegeIDVgl[zaehler]["UserID"] = "UserID stimmt nicht überein";
+
+                    zaehler = zaehler + 1;
+                }
+
 
             }
 
@@ -189,6 +256,7 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
         var weg1Zaehler = "";
         var wegeID2 = element["WegeID 2"];
         var weg2Zaehler = "";
+        var userID = element["UserID"];
 
         console.log("wegeID1");
         console.log(wegeID1);
@@ -221,6 +289,8 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
 
         var vmGleichZ = 0;
         var maxLaenge = document.getElementById("maxAbweichung").value;
+        console.log("maxLaenge");
+        console.log(maxLaenge);
 
 
         if(wegedatenKoordinaten[weg1Zaehler].length == wegedatenKoordinaten[weg2Zaehler].length){
@@ -236,8 +306,17 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
                 console.log("wegedatenKoordinaten[weg2Zaehler][k+1]");
                 console.log(wegedatenKoordinaten[weg2Zaehler][k+1]);
 
-                console.log(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1], maxLaenge);
-                var vglKoo = vergleichsFunktion(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1], maxLaenge);
+                console.log(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1]);
+                var vglKoo = false;
+                var distanz = vergleichsFunktion(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1]);
+
+                if (distanz <= maxLaenge){
+                    console.log("Distanz unter Grenzwert");
+                    vglKoo = true;
+                } else {
+                    console.log("Distanz über Grenzwert");
+                }
+
                 if(vglKoo == false){
                     vmGleichZ = vmGleichZ + 1;
                 }
@@ -251,7 +330,7 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
 
 
         if (vmGleichZ == 0){
-            wegeIDVglKoordinaten.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2});
+            wegeIDVglKoordinaten.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
             console.log("Speichere gleiche Koordinaten");
         } else {
             console.log("Koordinaten stimmen nicht überein");
@@ -266,9 +345,136 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
     return wegeIDVglKoordinaten;
 } //vergleicheKoordinaten()
 
-function vergleichsFunktion(lat1, lon1, lat2, lon2, maxLaenge){
+function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
 
-    var kooGleich = false;
+    //Vergleich Koordinaten Umstieg
+    // GPS-Koordinaten
+    // nehme ersten Weg und suche passenden Weg in bestimmtem Durchmesser (?), Start, Ziel, Verkehrsmittelwechsel
+    //TODO Vergleich Koordinaten Umstieg Festlegung Koordinatenbereich
+
+    wegeIDVglWegepaare.forEach(function(element){
+
+        var wegeID1 = element["WegeID 1"];
+        var weg1Zaehler = "";
+        var wegeID2 = element["WegeID 2"];
+        var weg2Zaehler = "";
+        var userID = element["UserID"];
+
+        console.log("wegeID1");
+        console.log(wegeID1);
+        console.log("wegeID2");
+        console.log(wegeID2);
+
+        for (z = 0; z < wegedatenKoordinaten.length; z++){
+            if (wegeID1 == wegedatenKoordinaten[z]["WegeID"]){
+                weg1Zaehler = z;
+            }
+            if (wegeID2 == wegedatenKoordinaten[z]["WegeID"]){
+                weg2Zaehler = z;
+            }
+
+        }
+
+        console.log("weg1Zaehler");
+        console.log(weg1Zaehler);
+        console.log("weg2Zaehler");
+        console.log(weg2Zaehler);
+
+        console.log("wegedatenKoordinaten[weg1Zaehler]");
+        console.log(wegedatenKoordinaten[weg1Zaehler]);
+        console.log("wegedatenKoordinaten[weg1Zaehler].length");
+        console.log(wegedatenKoordinaten[weg1Zaehler].length);
+        console.log(wegedatenKoordinaten[weg2Zaehler]);
+        console.log("wegedatenKoordinaten[weg2Zaehler]");
+        console.log("wegedatenKoordinaten[weg2Zaehler].length");
+        console.log(wegedatenKoordinaten[weg2Zaehler].length);
+
+        var vmGleichZ = 0;
+        var maxLaenge = document.getElementById("maxAbweichungUmstieg").value;
+        console.log("maxLaenge");
+        console.log(maxLaenge);
+
+
+        if(wegedatenKoordinaten[weg1Zaehler].length == wegedatenKoordinaten[weg2Zaehler].length){
+
+            for( var k = 0; k < wegedatenKoordinaten[weg1Zaehler].length-2; k = k + 2){
+                console.log(k);
+                console.log("wegedatenKoordinaten[weg1Zaehler][k]");
+                console.log(wegedatenKoordinaten[weg1Zaehler][k]);
+                console.log("wegedatenKoordinaten[weg1Zaehler][k+1]");
+                console.log(wegedatenKoordinaten[weg1Zaehler][k+1]);
+                console.log("wegedatenKoordinaten[weg1Zaehler][k+2]");
+                console.log(wegedatenKoordinaten[weg1Zaehler][k+2]);
+                console.log("wegedatenKoordinaten[weg1Zaehler][k+3]");
+                console.log(wegedatenKoordinaten[weg1Zaehler][k+3]);
+
+
+                console.log("wegedatenKoordinaten[weg2Zaehler][k]");
+                console.log(wegedatenKoordinaten[weg2Zaehler][k]);
+                console.log("wegedatenKoordinaten[weg2Zaehler][k+1]");
+                console.log(wegedatenKoordinaten[weg2Zaehler][k+1]);
+                console.log("wegedatenKoordinaten[weg2Zaehler][k+2]");
+                console.log(wegedatenKoordinaten[weg2Zaehler][k+2]);
+                console.log("wegedatenKoordinaten[weg2Zaehler][k+3]");
+                console.log(wegedatenKoordinaten[weg2Zaehler][k+3]);
+
+                var vglKoo = false;
+
+                //Vergleich Distanz weg1Zaehler][k]/weg1Zaehler][k+1] und weg1Zaehler][k+2]/weg1Zaehler][k+3]
+                console.log(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg1Zaehler][k+2], wegedatenKoordinaten[weg1Zaehler][k+3]);
+                var distanzweg1Zaehler = vergleichsFunktion(wegedatenKoordinaten[weg1Zaehler][k], wegedatenKoordinaten[weg1Zaehler][k+1], wegedatenKoordinaten[weg1Zaehler][k+2], wegedatenKoordinaten[weg1Zaehler][k+3]);
+
+                //Vergleich Distanz weg2Zaehler][k]/weg2Zaehler][k+1] und weg2Zaehler][k+2]/weg2Zaehler][k+3]
+                console.log(wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k+2], wegedatenKoordinaten[weg2Zaehler][k+3]);
+                var distanzweg2Zaehler = vergleichsFunktion(wegedatenKoordinaten[weg2Zaehler][k], wegedatenKoordinaten[weg2Zaehler][k+1], wegedatenKoordinaten[weg2Zaehler][k+2], wegedatenKoordinaten[weg2Zaehler][k+3]);
+
+                var distanz = "";
+                if(distanzweg1Zaehler > distanzweg2Zaehler){
+                    distanz = distanzweg1Zaehler - distanzweg2Zaehler;
+
+                } else {
+                    distanz = distanzweg2Zaehler - distanzweg1Zaehler;
+                }
+
+                console.log("distanz");
+                console.log(distanz);
+
+                if (distanz <= maxLaenge){
+                    console.log("Distanz unter Grenzwert");
+                    vglKoo = true;
+                } else {
+                    console.log("Distanz über Grenzwert");
+                }
+
+                if(vglKoo == false){
+                    vmGleichZ = vmGleichZ + 1;
+                }
+
+            }
+
+
+        } else {
+            console.log("Koordinatenanzahl stimmt nicht überein");
+        }
+
+
+        if (vmGleichZ == 0){
+            wegeIDVglKoordinatenUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
+            console.log("Speichere gleiche Koordinaten");
+        } else {
+            console.log("Koordinaten stimmen nicht überein");
+        }
+
+    });
+
+
+    console.log("wegeIDVglKoordinatenUmstieg");
+    console.log(wegeIDVglKoordinatenUmstieg);
+
+    return wegeIDVglKoordinatenUmstieg;
+} //vergleicheKoordinatenUmstieg()
+
+function vergleichsFunktion(lat1, lon1, lat2, lon2){
 
     const R = 6371e3; // Meter
     const φ1 = lat1 * Math.PI/180; // φ, λ in radian
@@ -287,14 +493,8 @@ function vergleichsFunktion(lat1, lon1, lat2, lon2, maxLaenge){
     console.log("Distanz in Metern");
     console.log(d);
 
-    if (d <= maxLaenge){
-        console.log("Distanz unter Grenzwert");
-        kooGleich = true;
-    } else {
-        console.log("Distanz über Grenzwert");
-    }
 
-    return kooGleich;
+    return d;
 } //vergleichsFunktion
 
 function vergleicheStartzeit(wegeIDVglWegepaare){
@@ -410,6 +610,176 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
     return wegeIDVglStartzeit;
 } //vergleicheStartzeit()
 
+function vergleicheUmstiegszeit(wegeIDVglWegepaare){
+
+    //Vergleich Zeit
+    // nehme ersten Weg und suche passenden Weg in bestimmtem Zeitbereich (?)
+    //TODO Vergleich Zeit Festlegung Zeitbereich
+
+    //Festlegung Zeitbereich von und bis
+    var umstiegszeitStu = document.getElementById("umstiegszeitStu").value;
+    var umstiegszeitMin = document.getElementById("umstiegszeitMin").value;
+    var umstiegszeitSec = document.getElementById("umstiegszeitSec").value;
+
+    var umstiegszeitMax = new Date();
+    umstiegszeitMax.setHours(umstiegszeitStu, umstiegszeitMin, umstiegszeitSec);
+    console.log("umstiegszeitMax");
+    console.log(umstiegszeitMax);
+
+    wegeIDVglWegepaare.forEach(function(element){
+
+        var wegeID1 = element["WegeID 1"];
+        var weg1Zaehler = "";
+        var wegeID2 = element["WegeID 2"];
+        var weg2Zaehler = "";
+
+        for (z = 0; z < wegedaten.length; z++){
+            if (wegeID1 == wegedaten[z]["WegeID"]){
+                weg1Zaehler = z;
+            }
+            if (wegeID2 == wegedaten[z]["WegeID"]){
+                weg2Zaehler = z;
+            }
+
+        }
+
+        console.log("weg1Zaehler");
+        console.log(weg1Zaehler);
+        console.log("weg2Zaehler");
+        console.log(weg2Zaehler);
+
+        console.log("wegedatenAbfahrtAnkunft[weg1Zaehler]");
+        console.log(wegedatenAbfahrtAnkunft[weg1Zaehler]);
+        console.log("wegedatenAbfahrtAnkunft[weg1Zaehler].length");
+        console.log(wegedatenAbfahrtAnkunft[weg1Zaehler].length);
+        console.log(wegedatenAbfahrtAnkunft[weg2Zaehler]);
+        console.log("wegedatenAbfahrtAnkunft[weg2Zaehler]");
+        console.log("wegedatenAbfahrtAnkunft[weg2Zaehler].length");
+        console.log(wegedatenAbfahrtAnkunft[weg2Zaehler].length);
+
+        var vmGleichZ = 0;
+
+        if(wegedatenAbfahrtAnkunft[weg1Zaehler].length == wegedatenAbfahrtAnkunft[weg2Zaehler].length){
+
+            for( var k = 0; k < wegedatenAbfahrtAnkunft[weg1Zaehler].length-2; k = k + 2){
+                console.log(k);
+                console.log("wegedatenAbfahrtAnkunft[weg1Zaehler][k+1]");
+                console.log(wegedatenAbfahrtAnkunft[weg1Zaehler][k+1]);
+                console.log("wegedatenAbfahrtAnkunft[weg1Zaehler][k+2]");
+                console.log(wegedatenAbfahrtAnkunft[weg1Zaehler][k+2]);
+
+                console.log("wegedatenAbfahrtAnkunft[weg2Zaehler][k+1]");
+                console.log(wegedatenAbfahrtAnkunft[weg2Zaehler][k+1]);
+                console.log("wegedatenAbfahrtAnkunft[weg2Zaehler][k+2]");
+                console.log(wegedatenAbfahrtAnkunft[weg2Zaehler][k+2]);
+
+
+                var vglZeit = false;
+
+                //Vergleich Umstiegszeit weg1Zaehler][k+1] und weg1Zaehler][k+2]
+                console.log(wegedatenAbfahrtAnkunft[weg1Zaehler][k+1], wegedatenAbfahrtAnkunft[weg1Zaehler][k+2]);
+                var umstiegszeitweg1Zaehler = vergleichsFunktionZeit(wegedatenAbfahrtAnkunft[weg1Zaehler][k+1], wegedatenAbfahrtAnkunft[weg1Zaehler][k+2]);
+                console.log("umstiegszeitweg1Zaehler");
+                console.log(umstiegszeitweg1Zaehler);
+
+                //Vergleich Umstiegszeit weg2Zaehler][k] und weg2Zaehler][k+1]
+                console.log(wegedatenAbfahrtAnkunft[weg2Zaehler][k+1], wegedatenAbfahrtAnkunft[weg2Zaehler][k+1]);
+                var umstiegszeitweg2Zaehler = vergleichsFunktionZeit(wegedatenAbfahrtAnkunft[weg2Zaehler][k+1], wegedatenAbfahrtAnkunft[weg2Zaehler][k+2]);
+                console.log("umstiegszeitweg2Zaehler");
+                console.log(umstiegszeitweg2Zaehler);
+
+                var zeitdifferenz = "";
+                if(umstiegszeitweg1Zaehler > umstiegszeitweg2Zaehler){
+                    zeitdifferenz = umstiegszeitweg1Zaehler - umstiegszeitweg2Zaehler;
+
+                } else {
+                    zeitdifferenz = umstiegszeitweg2Zaehler - umstiegszeitweg1Zaehler;
+                }
+
+                console.log("zeitdifferenz");
+                console.log(zeitdifferenz);
+
+                //TODO Vergleich if (zeitdifferenz <= umstiegszeitMax): Zahl/Millisekungen vs Date
+                if (zeitdifferenz <= umstiegszeitMax){
+                    console.log("Zeitdifferenz unter Grenzwert");
+                    vglZeit = true;
+                } else {
+                    console.log("Zeitdifferenz über Grenzwert");
+                }
+
+                if(vglZeit == false){
+                    vmGleichZ = vmGleichZ + 1;
+                }
+
+
+
+            }
+
+
+
+
+        } else {
+            console.log("Anzahl Zeitwerte stimmt nicht überein");
+        }
+
+
+        if (vmGleichZ == 0){
+            wegeIDVglDauerUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
+            console.log("Speichere passende Zeitdifferenz");
+        } else {
+            console.log("Zeitdifferenz stimmt nicht überein");
+        }
+
+
+
+
+
+    });
+
+    console.log("wegeIDVglDauerUmstieg");
+    console.log(wegeIDVglDauerUmstieg);
+
+
+    return wegeIDVglDauerUmstieg;
+} //vergleicheUmstiegszeit()
+
+
+function vergleichsFunktionZeit(ankunft, abfahrt) {
+
+    console.log(ankunft);
+    console.log(abfahrt);
+    var umstiegszeitMS = (abfahrt.getTime() - ankunft.getTime());
+    console.log("umstiegszeitMS")
+    console.log(umstiegszeitMS);
+
+
+    return umstiegszeitMS;
+} //vergleichsFunktionZeit()
+
+function millisekundenInDateWandeln(wertMS, datum) {
+
+    var wertSec = wertMS/1000;
+    console.log("wertSec")
+    console.log(wertSec);
+
+    function fuehrendeNull(wert) {
+        if (wert < 10) return "0" + parseInt(wert);
+        else return parseInt(wert);
+    }
+
+    var Jahr = datum.getUTCFullYear();
+    var Monat = datum.getUTCMonth();
+    var Tag = datum.getUTCDay();
+    var Stu = fuehrendeNull((wertSec/60/60)%24);
+    var Min = fuehrendeNull((wertSec/60)%60);
+    var Sec = fuehrendeNull(wertSec%60);
+
+    var daterueck = new Date(Jahr,  Monat, Tag, Stu, Min, Sec);
+
+
+    return daterueck;
+} //millisekundenInDateWandeln(wertMS)
+
 function vergleicheWegezweck(wegeIDVglWegepaare){
 
     //Vergleich Wegezweck
@@ -472,6 +842,7 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
         console.log(wegeID1);
         console.log("wegeID2");
         console.log(wegeID2);
+        var userID = element["UserID"];
 
         var zaehlerwegedatenVM1 = "";
         var zaehlerwegedatenVM2 = "";
@@ -516,7 +887,7 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
             }
 
             if (vmGleichZ == 0){
-                wegeIDVglVerkehrsmittel.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2});
+                wegeIDVglVerkehrsmittel.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
                 console.log("Speichere gleiches Verkehrsmittel");
             } else {
                 console.log("Verkehrsmittel stimmen nicht überein");
@@ -549,6 +920,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
 
         var wegeID1 = element["WegeID 1"];
         var wegeID2 = element["WegeID 2"];
+        var userIDvgl = element["UserID"];
 
         console.log(index);
 
@@ -582,7 +954,8 @@ function zeichneWegVgl(wegeIDVglWegepaare){
         // Ausgabe Wegepaare
         var wegepaarNeu = "<b class='content'>Wegepaar: </b>" + "<span class='content'>"+ index +"</span>" +
             "<br class='content'>WegeID 1: </br>" + "<span class='content'>" + wegeID1 +"</span>" +
-            "<br class='content'>WegeID 2: </br>" + "<span class='content'>" + wegeID2 +"</span>" + "<p></p>";
+            "<br class='content'>WegeID 2: </br>" + "<span class='content'>" + wegeID2 +"</span>" +
+            "<br class='content'>UserID: </br>" + "<span class='content'>" + userIDvgl +"</span>" +"<p></p>";
         var sel = document.getElementById("Ausgabe");
         var wegepaar = document.createElement('Wegepaar');
         wegepaar.innerHTML = wegepaarNeu;

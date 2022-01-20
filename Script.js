@@ -36,6 +36,14 @@ for (var i = 0; i < wegedatenKoordinaten.length; i++) {
 
 }
 
+// Array wegedatenAbfahrtAnkunft erstellen
+var wegedatenAbfahrtAnkunft = new Array();
+for (var i = 0; i < wegedatenAbfahrtAnkunft.length; i++) {
+    wegedatenAbfahrtAnkunft[i] = new Array(1);
+    wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
 // Array Anzahl Wege pro User
 var anzahlWegeUser = new Array();
 for (var j = 0; j < anzahlWegeUser.length; j++) {
@@ -165,6 +173,42 @@ function readJSONFunction() {
 
             }
             console.log(wegedatenKoordinaten);
+
+            //Array Abfahrts- und Ankunftszeiten einlesen
+            wegedatenAbfahrtAnkunft[zaehlerWegedaten] = new Array();
+            wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var i = 0; i < wayStage.length; i++) {
+
+                let cor = (wayStage[i]["a3_coordinatesList"]);
+
+                var abfahrt = 0;
+                var ankunft = 0;
+
+                for (var c = 0; c < cor.length; c++){
+
+                    //erste Koordinaten eines WayStages speichern
+                    if(c == 0){
+                        abfahrt = new Date(cor[c]["coordinate_timestamp"]);
+                    }
+
+                    //letzte Koordinaten eines WayStages speichern
+                    if(c == cor.length-1){
+                        ankunft = new Date(cor[c]["coordinate_timestamp"]);
+                    }
+
+                }
+
+                //console.log("abfahrt");
+                //console.log(abfahrt);
+
+                //console.log("ankunft");
+                //console.log(ankunft);
+
+                wegedatenAbfahrtAnkunft[zaehlerWegedaten].push(abfahrt);
+                wegedatenAbfahrtAnkunft[zaehlerWegedaten].push(ankunft);
+
+            }
+            console.log(wegedatenAbfahrtAnkunft);
 
 
             //zaehlerWegedaten erhöhen
