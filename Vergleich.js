@@ -78,7 +78,7 @@ var wegeIDVglAusgabe = new Array();
 
 function auswahlVglKriterien(){
 
-    document.getElementById("box7").style.display = "block"
+    document.getElementById("box7").style.display = "block";
 
 }
 function vergleicheWege() {
@@ -93,7 +93,7 @@ function vergleicheWege() {
 
     //Beginn Vergleiche
 
-    /*console.log("Vergleich Koordinaten");
+    console.log("Vergleich Koordinaten");
     wegeIDVglWegepaare = vergleicheKoordinaten(wegeIDVglWegepaare);
     console.log("Ende Vergleich Koordinaten");
     console.log("wegeIDVglWegepaare");
@@ -111,15 +111,13 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-     */
-
     console.log("Vergleich Umstiegszeit");
     wegeIDVglWegepaare =  vergleicheUmstiegszeit(wegeIDVglWegepaare);
     console.log("Ende Vergleich Umstiegszeit");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-    /*console.log("Vergleich Wegezweck");
+    console.log("Vergleich Wegezweck");
     wegeIDVglWegepaare =  vergleicheWegezweck(wegeIDVglWegepaare);
     console.log("Ende Vergleich Wegezweck");
     console.log("wegeIDVglWegepaare");
@@ -131,9 +129,6 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-     */
-
-
     console.log("Ende aller Vergleiche");
     //Ende Vergleiche
 
@@ -143,10 +138,7 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-
     zeichneWegVgl(wegeIDVglWegepaare);
-
-
 
 } //Ende vergleicheWege()
 
@@ -198,7 +190,6 @@ function bildeWegepaare() {
 
                     zaehler = zaehler + 1;
                 }
-
 
             }
 
@@ -292,7 +283,6 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
         console.log("maxLaenge");
         console.log(maxLaenge);
 
-
         if(wegedatenKoordinaten[weg1Zaehler].length == wegedatenKoordinaten[weg2Zaehler].length){
 
             for( var k = 0; k < wegedatenKoordinaten[weg1Zaehler].length; k = k + 2){
@@ -323,11 +313,9 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
 
             }
 
-
         } else {
             console.log("Koordinatenanzahl stimmt nicht überein");
         }
-
 
         if (vmGleichZ == 0){
             wegeIDVglKoordinaten.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
@@ -337,7 +325,6 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
         }
 
     });
-
 
     console.log("wegeIDVglKoordinaten");
     console.log(wegeIDVglKoordinaten);
@@ -394,7 +381,6 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
         console.log("maxLaenge");
         console.log(maxLaenge);
 
-
         if(wegedatenKoordinaten[weg1Zaehler].length == wegedatenKoordinaten[weg2Zaehler].length){
 
             for( var k = 0; k < wegedatenKoordinaten[weg1Zaehler].length-2; k = k + 2){
@@ -407,7 +393,6 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
                 console.log(wegedatenKoordinaten[weg1Zaehler][k+2]);
                 console.log("wegedatenKoordinaten[weg1Zaehler][k+3]");
                 console.log(wegedatenKoordinaten[weg1Zaehler][k+3]);
-
 
                 console.log("wegedatenKoordinaten[weg2Zaehler][k]");
                 console.log(wegedatenKoordinaten[weg2Zaehler][k]);
@@ -452,11 +437,9 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
 
             }
 
-
         } else {
             console.log("Koordinatenanzahl stimmt nicht überein");
         }
-
 
         if (vmGleichZ == 0){
             wegeIDVglKoordinatenUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
@@ -466,7 +449,6 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
         }
 
     });
-
 
     console.log("wegeIDVglKoordinatenUmstieg");
     console.log(wegeIDVglKoordinatenUmstieg);
@@ -489,10 +471,8 @@ function vergleichsFunktion(lat1, lon1, lat2, lon2){
 
     const d = R * c; // in Metern
 
-
     console.log("Distanz in Metern");
     console.log(d);
-
 
     return d;
 } //vergleichsFunktion
@@ -594,7 +574,6 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
         console.log("startzeitBis");
         console.log(startzeitBis);
 
-
         //speichere Wegepaar, wenn Weg2 im vorgegeben Zeitfenster zu Weg1 passt
         if (startzeitVon < date2 < startzeitBis){
             wegeIDVglStartzeit.push(element);
@@ -605,7 +584,6 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
 
     console.log("wegeIDVglStartzeit");
     console.log(wegeIDVglStartzeit);
-
 
     return wegeIDVglStartzeit;
 } //vergleicheStartzeit()
@@ -673,7 +651,6 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
                 console.log("wegedatenAbfahrtAnkunft[weg2Zaehler][k+2]");
                 console.log(wegedatenAbfahrtAnkunft[weg2Zaehler][k+2]);
 
-
                 var vglZeit = false;
 
                 //Vergleich Umstiegszeit weg1Zaehler][k+1] und weg1Zaehler][k+2]
@@ -691,7 +668,6 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
                 var zeitdifferenz = "";
                 if(umstiegszeitweg1Zaehler > umstiegszeitweg2Zaehler){
                     zeitdifferenz = umstiegszeitweg1Zaehler - umstiegszeitweg2Zaehler;
-
                 } else {
                     zeitdifferenz = umstiegszeitweg2Zaehler - umstiegszeitweg1Zaehler;
                 }
@@ -699,8 +675,11 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
                 console.log("zeitdifferenz");
                 console.log(zeitdifferenz);
 
-                //TODO Vergleich if (zeitdifferenz <= umstiegszeitMax): Zahl/Millisekungen vs Date
-                if (zeitdifferenz <= umstiegszeitMax){
+                var zeitdiffDate = millisekundenInDateWandeln(zeitdifferenz, umstiegszeitMax);
+                console.log("zeitdiff");
+                console.log(zeitdiffDate);
+
+                if (zeitdiffDate <= umstiegszeitMax){
                     console.log("Zeitdifferenz unter Grenzwert");
                     vglZeit = true;
                 } else {
@@ -711,17 +690,11 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
                     vmGleichZ = vmGleichZ + 1;
                 }
 
-
-
             }
-
-
-
 
         } else {
             console.log("Anzahl Zeitwerte stimmt nicht überein");
         }
-
 
         if (vmGleichZ == 0){
             wegeIDVglDauerUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
@@ -730,15 +703,10 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
             console.log("Zeitdifferenz stimmt nicht überein");
         }
 
-
-
-
-
     });
 
     console.log("wegeIDVglDauerUmstieg");
     console.log(wegeIDVglDauerUmstieg);
-
 
     return wegeIDVglDauerUmstieg;
 } //vergleicheUmstiegszeit()
@@ -752,7 +720,6 @@ function vergleichsFunktionZeit(ankunft, abfahrt) {
     console.log("umstiegszeitMS")
     console.log(umstiegszeitMS);
 
-
     return umstiegszeitMS;
 } //vergleichsFunktionZeit()
 
@@ -762,20 +729,22 @@ function millisekundenInDateWandeln(wertMS, datum) {
     console.log("wertSec")
     console.log(wertSec);
 
+    console.log(datum);
+
     function fuehrendeNull(wert) {
         if (wert < 10) return "0" + parseInt(wert);
         else return parseInt(wert);
     }
 
-    var Jahr = datum.getUTCFullYear();
-    var Monat = datum.getUTCMonth();
-    var Tag = datum.getUTCDay();
-    var Stu = fuehrendeNull((wertSec/60/60)%24);
-    var Min = fuehrendeNull((wertSec/60)%60);
-    var Sec = fuehrendeNull(wertSec%60);
+    var jahr = datum.getUTCFullYear();
+    var monat = datum.getMonth();
+    var tag = datum.getDate();
+    var stu = fuehrendeNull((wertSec/60/60)%24);
+    var min = fuehrendeNull((wertSec/60)%60);
+    var sec = fuehrendeNull(wertSec%60);
 
-    var daterueck = new Date(Jahr,  Monat, Tag, Stu, Min, Sec);
-
+    console.log(jahr,  monat, tag, stu, min, sec);
+    var daterueck = new Date(jahr,  monat, tag, stu, min, sec);
 
     return daterueck;
 } //millisekundenInDateWandeln(wertMS)
@@ -897,9 +866,7 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
             console.log("Verkehrsmittelanzahl stimmt nicht überein");
         }
 
-
     });
-
 
     console.log("wegeIDVglVerkehrsmittel");
     console.log(wegeIDVglVerkehrsmittel);
@@ -908,6 +875,8 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
 } //Ende vergleiche Verkehrsmittel()
 
 function zeichneWegVgl(wegeIDVglWegepaare){
+
+    //TODO Zeichne Weg evtl. Darstellung auf zwei Karten nebeneinander, Wegeinfos darunter
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
     document.getElementById("box6").style.display = "block";
@@ -962,7 +931,6 @@ function zeichneWegVgl(wegeIDVglWegepaare){
         wegepaar.value = wegepaarNeu;
         sel.appendChild(wegepaar);
 
-
     });
 
     console.log("wegeIDVglAusgabe");
@@ -999,13 +967,11 @@ function zeichneWegVgl(wegeIDVglWegepaare){
                     // looping though coordinatesList
                     for (var i = 0; i < wayStage.length; i++) {
 
-                        //neu
                         let cor = (wayStage[i]["a3_coordinatesList"])
 
                         anzC = 0;
                         var lat ;
                         var lng ;
-
 
                         var zaehler = "";
 
@@ -1024,15 +990,6 @@ function zeichneWegVgl(wegeIDVglWegepaare){
                         }
                         console.log(anzC);
 
-                        /*var anzC1 = anzC - 1;
-                        var aLatN = coordinates_lat[0];
-                        var aLngN = coordinates_lng[0];
-
-                        var aLatL = coordinates_lat[anzC1];
-                        var aLngL = coordinates_lng[anzC1];
-
-                         */
-
                         var aLatN = wegedatenKoordinaten[zaehler][f];
                         var aLngN = wegedatenKoordinaten[zaehler][f+1];
 
@@ -1041,14 +998,11 @@ function zeichneWegVgl(wegeIDVglWegepaare){
 
                         f = f + 4;
 
-
                         console.log("lat[0]: " + aLatN);
                         console.log("lng[0]: " + aLngN);
 
                         console.log("lat[anzC]: " + aLatL);
                         console.log("lng[anzC]: " + aLngL);
-
-                        //Ende-neu
 
                         // speichere Verkehrsmittel der Etappe/wayStage
                         let vm = (wayStage[i]["a0_mode"]);
