@@ -78,7 +78,7 @@ var wegeIDVglAusgabe = new Array();
 
 function auswahlVglKriterien(){
 
-    document.getElementById("box7").style.display = "block";
+    document.getElementById("box6").style.display = "block";
 
 }
 function vergleicheWege() {
@@ -879,7 +879,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
     //TODO Zeichne Weg evtl. Darstellung auf zwei Karten nebeneinander, Wegeinfos darunter
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
-    document.getElementById("box6").style.display = "block";
+    document.getElementById("box7").style.display = "block";
 
     // alle Verkehrsmittel dem Array verkehrsmittel hinzufügen
     var verkehrsmittel = new Array();

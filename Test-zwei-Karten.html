@@ -10,6 +10,44 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
     <style>
+        #aussendiv { display: flex; }
+        .innendiv { width:500px; }
+    </style>
+
+    <div id="aussendiv">
+        <div class="innendiv">
+            <div class="eins">
+
+                <div class="box1">
+                    <p> <!-- Absatz -->
+                        <b>Auswertungstool Wegedaten MobiDiary 2021</b>
+                    <p> <!-- Absatz -->
+                        <!-- File Chooser -->
+                    <form>
+                        Aufgezeichnete Wege zur Kartenansicht auswählen (.json):
+                        <p> <!-- Absatz -->
+                            <input type="file" id="jsonFiles" name="img" multiple>
+
+                        <p> <!-- Absatz -->
+                            <button onclick="readJSONFunction()" type="button">Daten einlesen</button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="innendiv">
+            <div class="zwei">
+
+                <div class="box5" id="map"></div>
+
+            </div>
+        </div>
+        <div class="innendiv">Drei</div>
+    </div>
+
+
+    <style>
 
         .box1 {
             float: down;
@@ -39,7 +77,7 @@
             box-sizing: border-box;
         }
         .box5 {
-            float: left;
+            float: down;
             padding: 10px;
             width: 50%;
             box-sizing: border-box;
@@ -74,9 +112,9 @@
 <!-- Text (links)-->
 <div class="box1">
     <p> <!-- Absatz -->
-    <b>Auswertungstool Wegedaten MobiDiary 2021</b>
+        <b>Auswertungstool Wegedaten MobiDiary 2021</b>
     <p> <!-- Absatz -->
-    <!-- File Chooser -->
+        <!-- File Chooser -->
     <form>
         Aufgezeichnete Wege zur Kartenansicht auswählen (.json):
         <p> <!-- Absatz -->
@@ -113,10 +151,10 @@
 
     <p></p>
     <label>Auswahl Nutzer:
-       <select id="AuswahlNutzer">
+        <select id="AuswahlNutzer">
             <option value="alle">alle</option>
-       </select>
-   </label>
+        </select>
+    </label>
 
     <p>Auswahl Nutzertyp:</p>
     <fieldset>
@@ -130,8 +168,8 @@
         <label for="eigene Auswahl">eigene Auswahl</label>
     </fieldset>
 
-   <p> <!-- Absatz -->
-   <button onclick="auswahlNutzertyp()" type="button">Nutzerauswahl bestätigen</button>
+    <p> <!-- Absatz -->
+        <button onclick="auswahlNutzertyp()" type="button">Nutzerauswahl bestätigen</button>
 
 </div>
 
@@ -353,7 +391,7 @@
 </div>
 
 <!-- Map Object (rechts)-->
-<div class="box5" id="map"></div>
+<!--<div class="box5" id="map"></div>-->
 
 <script src="Script.js"></script>
 <script src="Vergleich.js"></script>
