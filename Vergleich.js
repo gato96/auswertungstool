@@ -831,39 +831,40 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
         console.log("zaehlerwegedatenVM2");
         console.log(zaehlerwegedatenVM2);
 
-        var zV = 0;
-
-        for (var w = 0; w < wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length; w++){
-            console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]");
-            console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]);
-            console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]");
-            console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]);
-
-            if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w] == wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]){
-                zV = zV + 1;
-            }
-        }
-
         var vmGleichZ = 0;
 
-        if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length == zV){
+        if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length == wegedatenVerkehrsmittel[zaehlerwegedatenVM2].length){
 
-            for(var w = 0; w < zV; w++){
-                if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w] != wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]){
+            for (var w = 0; w < wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length; w++){
+                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]");
+                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]);
+                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]");
+                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]);
+
+                var vglVM = false;
+
+                if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w] == wegedatenVerkehrsmittel[zaehlerwegedatenVM2][w]){
+                    console.log("Verkehrsmittel gleich");
+                    vglVM = true;
+                } else {
+                    console.log("Verkehrsmittel stimmen nicht überein");
+                }
+
+                if(vglVM == false){
                     vmGleichZ = vmGleichZ + 1;
                 }
 
             }
 
-            if (vmGleichZ == 0){
-                wegeIDVglVerkehrsmittel.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
-                console.log("Speichere gleiches Verkehrsmittel");
-            } else {
-                console.log("Verkehrsmittel stimmen nicht überein");
-            }
-
         } else {
             console.log("Verkehrsmittelanzahl stimmt nicht überein");
+        }
+
+        if (vmGleichZ == 0){
+            wegeIDVglVerkehrsmittel.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
+            console.log("Speichere gleiches Verkehrsmittel");
+        } else {
+            console.log("Verkehrsmittel stimmen nicht überein");
         }
 
     });

@@ -36,3 +36,5 @@ var date2 = new Date(exampleTimestamp2);
 var jqPlotTimestamp2 = date2.getTime();
 
 console.log(date2);
+
+
