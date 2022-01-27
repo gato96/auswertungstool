@@ -22,34 +22,34 @@ for (var i = 0; i < wegedaten.length; i++) {
 
 // Array wegedatenVerkehrsmittel erstellen
 var wegedatenVerkehrsmittel = new Array();
-for (var i = 0; i < wegedatenVerkehrsmittel.length; i++) {
-    wegedatenVerkehrsmittel[i] = new Array(1);
+for (var j = 0; j < wegedatenVerkehrsmittel.length; j++) {
+    wegedatenVerkehrsmittel[j] = new Array(1);
     wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = "";
 
 }
 
 // Array wegedatenKoordinaten erstellen
 var wegedatenKoordinaten = new Array();
-for (var i = 0; i < wegedatenKoordinaten.length; i++) {
-    wegedatenKoordinaten[i] = new Array(1);
+for (var k = 0; k < wegedatenKoordinaten.length; k++) {
+    wegedatenKoordinaten[k] = new Array(1);
     wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = "";
 
 }
 
 // Array wegedatenAbfahrtAnkunft erstellen
 var wegedatenAbfahrtAnkunft = new Array();
-for (var i = 0; i < wegedatenAbfahrtAnkunft.length; i++) {
-    wegedatenAbfahrtAnkunft[i] = new Array(1);
+for (var l = 0; l < wegedatenAbfahrtAnkunft.length; l++) {
+    wegedatenAbfahrtAnkunft[l] = new Array(1);
     wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = "";
 
 }
 
 // Array Anzahl Wege pro User
 var anzahlWegeUser = new Array();
-for (var j = 0; j < anzahlWegeUser.length; j++) {
-    anzahlWegeUser[j] = new Array(2);
-    anzahlWegeUser[j]["UserID"] = "";
-    anzahlWegeUser[j]["Anzahl Wege"] = 0;
+for (var m = 0; m < anzahlWegeUser.length; m++) {
+    anzahlWegeUser[m] = new Array(2);
+    anzahlWegeUser[m]["UserID"] = "";
+    anzahlWegeUser[m]["Anzahl Wege"] = 0;
 }
 
 // Arrays zum speichern der WegeIDs, die dieses Verkehrsmittel enthalten
@@ -124,8 +124,8 @@ function readJSONFunction() {
             //Array wegedatenVerkehrsmittel einlesen
             wegedatenVerkehrsmittel[zaehlerWegedaten] = new Array();
             wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
-            for (var i = 0; i < wayStage.length; i++) {
-                wegedatenVerkehrsmittel[zaehlerWegedaten].push(wayStage[i]["a0_mode"]);
+            for (var j = 0; j < wayStage.length; j++) {
+                wegedatenVerkehrsmittel[zaehlerWegedaten].push(wayStage[j]["a0_mode"]);
 
             }
             console.log(wegedatenVerkehrsmittel);
@@ -133,9 +133,9 @@ function readJSONFunction() {
             //Array wegedatenKoordinaten einlesen
             wegedatenKoordinaten[zaehlerWegedaten] = new Array();
             wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
-            for (var i = 0; i < wayStage.length; i++) {
+            for (var l = 0; l < wayStage.length; l++) {
 
-                let cor = (wayStage[i]["a3_coordinatesList"]);
+                let cor = (wayStage[l]["a3_coordinatesList"]);
 
                 var lat0 = 0;
                 var lng0 = 0;
@@ -177,22 +177,22 @@ function readJSONFunction() {
             //Array Abfahrts- und Ankunftszeiten einlesen
             wegedatenAbfahrtAnkunft[zaehlerWegedaten] = new Array();
             wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
-            for (var i = 0; i < wayStage.length; i++) {
+            for (var k = 0; k < wayStage.length; k++) {
 
-                let cor = (wayStage[i]["a3_coordinatesList"]);
+                let cor = (wayStage[k]["a3_coordinatesList"]);
 
                 var abfahrt = 0;
                 var ankunft = 0;
 
-                for (var c = 0; c < cor.length; c++){
+                for (var d = 0; d < cor.length; d++){
 
                     //erste Koordinaten eines WayStages speichern
-                    if(c == 0){
+                    if(d == 0){
                         abfahrt = new Date(cor[c]["coordinate_timestamp"]);
                     }
 
                     //letzte Koordinaten eines WayStages speichern
-                    if(c == cor.length-1){
+                    if(d == cor.length-1){
                         ankunft = new Date(cor[c]["coordinate_timestamp"]);
                     }
 
@@ -422,7 +422,7 @@ function aktualisiereNutzer() {
     // sortiere Array anzahlWegeUser nach Anzahl der Wege absteigend in Hilfsarray sortAnzahlWegeUser
 
     var sortAnzahlWegeUser = new Array();
-    anzahlWegeUser.forEach(function(element,index) {
+    anzahlWegeUser.forEach(function(element) {
         sortAnzahlWegeUser.push({name: element["UserID"],val: element["Anzahl Wege"]});
     });
     sortAnzahlWegeUser.sort(function(a,b){
@@ -435,7 +435,7 @@ function aktualisiereNutzer() {
     anzahlWegeUser.splice(0,anzahlWegeUser.length);
 
     // befülle Ursprungsarray mit sortierten Werten
-    sortAnzahlWegeUser.forEach(function(element, index){
+    sortAnzahlWegeUser.forEach(function(element){
         anzahlWegeUser.push({["UserID"]: element.name,["Anzahl Wege"]: element.val});
     });
 
@@ -445,7 +445,7 @@ function aktualisiereNutzer() {
     userID.splice(0,userID.length);
 
     // befülle Array mit sortierten Werten, damit Reihenfolge UserID-Anzahl Wege gleich der Auswahl der UserId ist
-    sortAnzahlWegeUser.forEach(function(element, index){
+    sortAnzahlWegeUser.forEach(function(element){
         userID.push(element.name);
     });
 
@@ -454,7 +454,7 @@ function aktualisiereNutzer() {
     // Füge jeden im Array userId gespeicherten Nutzer der Übersicht WegeID-Anzahl Wege hinzu
     var selA = document.getElementById("Anzahl Wege pro Nutzer");
 
-    anzahlWegeUser.forEach(function(element, index) {
+    anzahlWegeUser.forEach(function(element) {
         var user = element["UserID"];
         var anzahl = element["Anzahl Wege"];
 
@@ -469,7 +469,7 @@ function aktualisiereNutzer() {
 
     // Füge jeden im Array userId gespeicherten Nutzer der Auswahl der userID hinzu
 
-    userID.forEach(function(element, index) {
+    userID.forEach(function(element) {
         var opt = document.createElement('option');
         opt.innerHTML = element;
         opt.value = element;
@@ -545,7 +545,7 @@ function auswahlNutzertyp() {
                 break;
             case "Pendler (nur ÖPNV)":
                 if(checkboxesNutzer[i].checked){
-                    zeichneAllePendlerwegeÖPNV();}
+                    zeichneAllePendlerwegeOEPNV();}
                 break;
             case "eigene Auswahl":
                 if(checkboxesNutzer[i].checked){
@@ -620,7 +620,7 @@ function zeichneAllePendlerwege() {
 
 } // Ende zeichneAllePendlerwege()
 
-function zeichneAllePendlerwegeÖPNV() {
+function zeichneAllePendlerwegeOEPNV() {
     // Abfrage der gewählten NutzerID
     var user = abfrageNutzer();
     console.log(user);
@@ -648,7 +648,7 @@ function zeichneAllePendlerwegeÖPNV() {
     // Wege, die den Filtern entsprechen zeichnen
     zeichneWeg(wegeID, verkehrsmittel);
 
-} // Ende zeichneAllePendlerwegeÖPNV()
+} // Ende zeichneAllePendlerwegeOEPNV()
 
 function wendeFilterAn() {
     console.log("Wende Filter an!")
@@ -1250,8 +1250,6 @@ function zeichneWeg(wegeID, verkehrsmittel){
     // load selected JSON Files
     let filesAuswahl = document.getElementById("jsonFiles").files;
 
-    var ausgabe_data = new Array();
-
     // read selected JSON Files
     for(file of filesAuswahl) {
         let readerAuswahl = new FileReader();
@@ -1271,7 +1269,6 @@ function zeichneWeg(wegeID, verkehrsmittel){
                     let wayStage = (content[0]["a5_wayStages"])
                     //console.log(wayStage)
 
-                    let vmA = "";
                     var alleWayStages = "";
                     var f = 0;
 

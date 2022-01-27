@@ -8,8 +8,8 @@ for (var j = 0; j < wegeIDVgl.length; j++) {
 
 }
 var wegeIDVglEinfach = new Array();
-for (var a = 0; a < wegeIDVglEinfach.length; a++) {
-    wegeIDVglEinfach[a] = new Array(3);
+for (var l = 0; l < wegeIDVglEinfach.length; l++) {
+    wegeIDVglEinfach[l] = new Array(3);
     wegeIDVglEinfach[zaehler]["WegeID 1"] = "";
     wegeIDVglEinfach[zaehler]["WegeID 2"] = "";
     wegeIDVglEinfach[zaehler]["UserID"] = "";
@@ -40,8 +40,8 @@ for (var g = 0; g < wegeIDVglKoordinaten.length; g++) {
 }
 
 var wegeIDVglKoordinatenUmstieg = new Array();
-for (var c = 0; c < wegeIDVglKoordinatenUmstieg.length; c++) {
-    wegeIDVglKoordinatenUmstieg[c] = new Array(3);
+for (var h = 0; h < wegeIDVglKoordinatenUmstieg.length; h++) {
+    wegeIDVglKoordinatenUmstieg[h] = new Array(3);
     wegeIDVglKoordinatenUmstieg[zaehler]["WegeID 1"] = "";
     wegeIDVglKoordinatenUmstieg[zaehler]["WegeID 2"] = "";
     wegeIDVglKoordinatenUmstieg[zaehler]["UserID"] = "";
@@ -55,8 +55,8 @@ for (var b = 0; b < wegeIDVglWegezweck.length; b++) {
     wegeIDVglWegezweck[zaehler]["UserID"] = "";
 }
 var wegeIDVglVerkehrsmittel = new Array();
-for (var c = 0; c < wegeIDVglVerkehrsmittel.length; c++) {
-    wegeIDVglVerkehrsmittel[c] = new Array(3);
+for (var f = 0; c < wegeIDVglVerkehrsmittel.length; f++) {
+    wegeIDVglVerkehrsmittel[f] = new Array(3);
     wegeIDVglVerkehrsmittel[zaehler]["WegeID 1"] = "";
     wegeIDVglVerkehrsmittel[zaehler]["WegeID 2"] = "";
     wegeIDVglVerkehrsmittel[zaehler]["UserID"] = "";
@@ -72,8 +72,8 @@ for (var a = 0; a < wegeIDVglWegepaare.length; a++) {
 }
 
 var wegeIDVglWegepaareAnfang = new Array();
-for (var a = 0; a < wegeIDVglWegepaareAnfang.length; a++) {
-    wegeIDVglWegepaareAnfang[a] = new Array(4);
+for (var k = 0; k < wegeIDVglWegepaareAnfang.length; k++) {
+    wegeIDVglWegepaareAnfang[k] = new Array(4);
     wegeIDVglWegepaareAnfang[zaehler]["WegeID 1"] = "";
     wegeIDVglWegepaareAnfang[zaehler]["WegeID 2"] = "";
     wegeIDVglWegepaareAnfang[zaehler]["UserID"] = "";
@@ -1109,8 +1109,6 @@ function zeichneWegVgl(wegeIDVglWegepaare){
     // load selected JSON Files
     let filesAuswahl = document.getElementById("jsonFiles").files;
 
-    var ausgabe_data = new Array();
-
     // read selected JSON Files
     for(file of filesAuswahl) {
         let readerAuswahl = new FileReader();
@@ -1130,7 +1128,6 @@ function zeichneWegVgl(wegeIDVglWegepaare){
                     let wayStage = (content[0]["a5_wayStages"])
                     //console.log(wayStage)
 
-                    let vmA = "";
                     var alleWayStages = "";
                     var f = 0;
 
@@ -1139,7 +1136,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
 
                         let cor = (wayStage[i]["a3_coordinatesList"])
 
-                        anzC = 0;
+                        var anzC = 0;
                         var lat ;
                         var lng ;
 
@@ -1151,9 +1148,9 @@ function zeichneWegVgl(wegeIDVglWegepaare){
                             }
                         }
 
-                        for (var c = 0; c < cor.length; c++){
-                            lat = cor[c]["coordinate_lat"];
-                            lng = cor[c]["coordinate_lng"];
+                        for (var d = 0; d < cor.length; d++){
+                            lat = cor[d]["coordinate_lat"];
+                            lng = cor[d]["coordinate_lng"];
                             coordinates_lat.push(lat);
                             coordinates_lng.push(lng);
                             anzC = anzC + 1;
