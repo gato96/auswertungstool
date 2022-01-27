@@ -71,6 +71,15 @@ for (var a = 0; a < wegeIDVglWegepaare.length; a++) {
     wegeIDVglWegepaare[zaehler]["UserID"] = "";
 }
 
+var wegeIDVglWegepaareAnfang = new Array();
+for (var a = 0; a < wegeIDVglWegepaareAnfang.length; a++) {
+    wegeIDVglWegepaareAnfang[a] = new Array(4);
+    wegeIDVglWegepaareAnfang[zaehler]["WegeID 1"] = "";
+    wegeIDVglWegepaareAnfang[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegepaareAnfang[zaehler]["UserID"] = "";
+    wegeIDVglWegepaareAnfang[zaehler]["Kommentar"] = "";
+}
+
 var wegeIDVglAusgabe = new Array();
 
 
@@ -88,8 +97,11 @@ function vergleicheWege() {
     console.log("Bilde Wegepaare");
     wegeIDVglWegepaare = bildeWegepaare();
     console.log("wegeIDVglWegepaare");
-
     console.log(wegeIDVglWegepaare);
+
+    wegeIDVglWegepaareAnfang = befuelleArraywegeIDVglWegepaareAnfang(wegeIDVglWegepaare, wegeIDVglWegepaareAnfang);
+    console.log("wegeIDVglWegepaareAnfang");
+    console.log(wegeIDVglWegepaareAnfang);
 
     //Beginn Vergleiche
 
@@ -130,6 +142,12 @@ function vergleicheWege() {
     console.log(wegeIDVglWegepaare);
 
     console.log("Ende aller Vergleiche");
+    console.log("wegeIDVglWegepaareAnfang");
+    console.log(wegeIDVglWegepaareAnfang);
+
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
     //Ende Vergleiche
 
     //Ausgabe der auf Karte und Ausgabe Wegeinformationen
@@ -234,6 +252,21 @@ function bildeWegepaare() {
 
 }  //Ende bildeWegepaare()
 
+function befuelleArraywegeIDVglWegepaareAnfang(wegeIDVglWegepaare, wegeIDVglWegepaareAnfang) {
+
+    wegeIDVglWegepaare.forEach(function(element){
+
+        var wegeID1 = element["WegeID 1"];
+        var wegeID2 = element["WegeID 2"];
+        var userID = element["UserID"];
+
+        wegeIDVglWegepaareAnfang.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": "Start"});
+
+    });
+
+    return wegeIDVglWegepaareAnfang;
+}
+
 function vergleicheKoordinaten(wegeIDVglWegepaare){
 
     //Vergleich Koordinaten
@@ -254,7 +287,7 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
         console.log("wegeID2");
         console.log(wegeID2);
 
-        for (z = 0; z < wegedatenKoordinaten.length; z++){
+        for (var z = 0; z < wegedatenKoordinaten.length; z++){
             if (wegeID1 == wegedatenKoordinaten[z]["WegeID"]){
                 weg1Zaehler = z;
             }
@@ -263,6 +296,22 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
             }
 
         }
+
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
+
 
         console.log("weg1Zaehler");
         console.log(weg1Zaehler);
@@ -315,13 +364,16 @@ function vergleicheKoordinaten(wegeIDVglWegepaare){
 
         } else {
             console.log("Koordinatenanzahl stimmt nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinatenanzahl stimmt nicht überein"});
         }
 
         if (vmGleichZ == 0){
             wegeIDVglKoordinaten.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
-            console.log("Speichere gleiche Koordinaten");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1, {"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinaten stimmen überein"});
+            console.log("Koordinaten stimmen überein");
         } else {
             console.log("Koordinaten stimmen nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinaten stimmen nicht überein"});
         }
 
     });
@@ -352,7 +404,7 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
         console.log("wegeID2");
         console.log(wegeID2);
 
-        for (z = 0; z < wegedatenKoordinaten.length; z++){
+        for (var z = 0; z < wegedatenKoordinaten.length; z++){
             if (wegeID1 == wegedatenKoordinaten[z]["WegeID"]){
                 weg1Zaehler = z;
             }
@@ -366,6 +418,21 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
         console.log(weg1Zaehler);
         console.log("weg2Zaehler");
         console.log(weg2Zaehler);
+
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
 
         console.log("wegedatenKoordinaten[weg1Zaehler]");
         console.log(wegedatenKoordinaten[weg1Zaehler]);
@@ -438,14 +505,17 @@ function vergleicheKoordinatenUmstieg(wegeIDVglWegepaare){
             }
 
         } else {
-            console.log("Koordinatenanzahl stimmt nicht überein");
+            console.log("Koordinatenanzahl Umstieg stimmt nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinatenanzahl Umstieg stimmt nicht überein"});
         }
 
         if (vmGleichZ == 0){
             wegeIDVglKoordinatenUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
-            console.log("Speichere gleiche Koordinaten");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinaten Umstieg stimmen überein"});
+            console.log("Koordinaten Umstieg stimmen überein");
         } else {
-            console.log("Koordinaten stimmen nicht überein");
+            console.log("Koordinaten Umstieg stimmen nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Koordinaten Umstieg stimmen nicht überein"});
         }
 
     });
@@ -499,8 +569,9 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
         var weg1Zaehler = "";
         var wegeID2 = element["WegeID 2"];
         var weg2Zaehler = "";
+        var userID = element["UserID"];
 
-        for (z = 0; z < wegedaten.length; z++){
+        for (var z = 0; z < wegedaten.length; z++){
             if (wegeID1 == wegedaten[z]["WegeID"]){
                 weg1Zaehler = z;
             }
@@ -509,6 +580,21 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
             }
 
         }
+
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
 
         //Startzeit Weg1 als date anlegen
         var startzeit1 = wegedaten[weg1Zaehler]["Startzeit"];
@@ -577,7 +663,10 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
         //speichere Wegepaar, wenn Weg2 im vorgegeben Zeitfenster zu Weg1 passt
         if (startzeitVon < date2 < startzeitBis){
             wegeIDVglStartzeit.push(element);
-            console.log("Speichere innerhalb Zeitraum");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Startzeit stimmt überein"});
+            console.log("Startzeit Wege innerhalb Zeitraum");
+        } else {
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Startzeit stimmt nicht überein"});
         }
 
     });
@@ -610,8 +699,9 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
         var weg1Zaehler = "";
         var wegeID2 = element["WegeID 2"];
         var weg2Zaehler = "";
+        var userID = element["UserID"];
 
-        for (z = 0; z < wegedaten.length; z++){
+        for (var z = 0; z < wegedaten.length; z++){
             if (wegeID1 == wegedaten[z]["WegeID"]){
                 weg1Zaehler = z;
             }
@@ -625,6 +715,21 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
         console.log(weg1Zaehler);
         console.log("weg2Zaehler");
         console.log(weg2Zaehler);
+
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
 
         console.log("wegedatenAbfahrtAnkunft[weg1Zaehler]");
         console.log(wegedatenAbfahrtAnkunft[weg1Zaehler]);
@@ -693,14 +798,17 @@ function vergleicheUmstiegszeit(wegeIDVglWegepaare){
             }
 
         } else {
-            console.log("Anzahl Zeitwerte stimmt nicht überein");
+            console.log("Anzahl Zeitwerte Umstieg stimmt nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Anzahl Zeitwerte Umstieg stimmt nicht überein"});
         }
 
         if (vmGleichZ == 0){
             wegeIDVglDauerUmstieg.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
-            console.log("Speichere passende Zeitdifferenz");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Zeitdifferenz Umstieg stimmt überein"});
+            console.log("Zeitdifferenz Umstieg stimmt überein");
         } else {
-            console.log("Zeitdifferenz stimmt nicht überein");
+            console.log("Zeitdifferenz Umstieg stimmt nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Zeitdifferenz Umstieg stimmt nicht überein"});
         }
 
     });
@@ -760,8 +868,9 @@ function vergleicheWegezweck(wegeIDVglWegepaare){
         var weg1Zaehler = "";
         var wegeID2 = element["WegeID 2"];
         var weg2Zaehler = "";
+        var userID = element["UserID"];
 
-        for (z = 0; z < wegedaten.length; z++){
+        for (var z = 0; z < wegedaten.length; z++){
             if (wegeID1 == wegedaten[z]["WegeID"]){
                 weg1Zaehler = z;
             }
@@ -770,6 +879,22 @@ function vergleicheWegezweck(wegeIDVglWegepaare){
             }
 
         }
+
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
+
 
         var wegeZweck1= wegedaten[weg1Zaehler]["Wegezweck"];
 
@@ -786,7 +911,10 @@ function vergleicheWegezweck(wegeIDVglWegepaare){
         //speichere Wegepaar, wenn Wegezweck von Weg1 und Weg1 gleich ist
         if (wegeZweck1 == wegeZweck2){
             wegeIDVglWegezweck.push(element);
-            console.log("Speichere gleicher Zweck");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Wegezweck stimmt überein"});
+            console.log("Wegezweck stimmt überein");
+        } else {
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Wegezweck stimmt nicht überein"});
         }
 
     });
@@ -831,6 +959,23 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
         console.log("zaehlerwegedatenVM2");
         console.log(zaehlerwegedatenVM2);
 
+        var wegZaehlerX = 0;
+
+        for (var x = 0; x < wegeIDVglWegepaareAnfang.length; x++) {
+            if (wegeID1 == wegeIDVglWegepaareAnfang[x]["WegeID 1"] && wegeID2 == wegeIDVglWegepaareAnfang[x]["WegeID 2"]) {
+                wegZaehlerX = x;
+            }
+        }
+
+        console.log("wegeIDVglWegepaareAnfang[wegZaehlerX]");
+        console.log(wegeIDVglWegepaareAnfang[wegZaehlerX]);
+
+        var kommentar = wegeIDVglWegepaareAnfang[wegZaehlerX]["Kommentar"];
+        console.log("kommentar");
+        console.log(kommentar);
+
+        //-----A
+
         var vmGleichZ = 0;
 
         if(wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length == wegedatenVerkehrsmittel[zaehlerwegedatenVM2].length){
@@ -857,14 +1002,17 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
             }
 
         } else {
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Verkehrsmittelanzahl stimmt nicht überein"});
             console.log("Verkehrsmittelanzahl stimmt nicht überein");
         }
 
         if (vmGleichZ == 0){
             wegeIDVglVerkehrsmittel.push({"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID});
-            console.log("Speichere gleiches Verkehrsmittel");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Verkehrsmittel stimmen überein"});
+            console.log("Verkehrsmittel stimmen überein");
         } else {
-            console.log("Verkehrsmittel stimmen nicht überein");
+            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Verkehrsmittelanzahl stimmt nicht überein"});
+            console.log("Verkehrsmittelanzahl stimmt nicht überein");
         }
 
     });
@@ -877,10 +1025,31 @@ function vergleicheVerkehrsmittel(wegeIDVglWegepaare) {
 
 function zeichneWegVgl(wegeIDVglWegepaare){
 
-    //TODO Zeichne Weg evtl. Darstellung auf zwei Karten nebeneinander, Wegeinfos darunter
-
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
     document.getElementById("box7").style.display = "block";
+
+    wegeIDVglWegepaareAnfang.forEach(function(element,index){
+        var wegeID1 = element["WegeID 1"];
+        var wegeID2 = element["WegeID 2"];
+        var userIDvgl = element["UserID"];
+        var kommentar = element["Kommentar"];
+
+        // Ausgabe aller Wegepaare
+        var wegepaarNeu = "<b class='content'>Wegepaar: </b>" + "<span class='content'>"+ index +"</span>" +
+            "<br class='content'>WegeID 1: </br>" + "<span class='content'>" + wegeID1 +"</span>" +
+            "<br class='content'>WegeID 2: </br>" + "<span class='content'>" + wegeID2 +"</span>" +
+            "<br class='content'>UserID: </br>" + "<span class='content'>" + userIDvgl +"</span>" +
+            "<br class='content'>Kommentar: </br>" + "<span class='content'>" + kommentar +"</span>" +"<p></p>";
+        var sel = document.getElementById("AusgabeAlle");
+        var wegepaar = document.createElement('Wegepaar');
+        wegepaar.innerHTML = wegepaarNeu;
+        wegepaar.value = wegepaarNeu;
+        sel.appendChild(wegepaar);
+
+    });
+
+
+    //TODO Zeichne Weg evtl. Darstellung auf zwei Karten nebeneinander, Wegeinfos darunter
 
     // alle Verkehrsmittel dem Array verkehrsmittel hinzufügen
     var verkehrsmittel = new Array();
