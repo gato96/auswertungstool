@@ -188,12 +188,12 @@ function readJSONFunction() {
 
                     //erste Koordinaten eines WayStages speichern
                     if(d == 0){
-                        abfahrt = new Date(cor[c]["coordinate_timestamp"]);
+                        abfahrt = new Date(cor[d]["coordinate_timestamp"]);
                     }
 
                     //letzte Koordinaten eines WayStages speichern
                     if(d == cor.length-1){
-                        ankunft = new Date(cor[c]["coordinate_timestamp"]);
+                        ankunft = new Date(cor[d]["coordinate_timestamp"]);
                     }
 
                 }
