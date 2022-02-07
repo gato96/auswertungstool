@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Auswertungstool Wegedaten MobiDiary 2021</title>
+    <title>Auswertungstool Wegedaten MobiDiary 2021 -1-</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin=""/>
@@ -58,20 +58,6 @@
             width: 50%;
             box-sizing: border-box;
         }
-        .box8 {
-            display: none;
-            float: down;
-            padding: 10px;
-            width: 50%;
-            box-sizing: border-box;
-        }
-        .box9 {
-            display: none;
-            float: down;
-            padding: 10px;
-            width: 50%;
-            box-sizing: border-box;
-        }
         #map {
             position: absolute;
             top: 0;
@@ -88,9 +74,9 @@
 <!-- Text (links)-->
 <div class="box1">
     <p> <!-- Absatz -->
-    <b>Auswertungstool Wegedaten MobiDiary 2021</b>
+        <b>Auswertungstool Wegedaten MobiDiary 2021 -1-</b>
     <p> <!-- Absatz -->
-    <!-- File Chooser -->
+        <!-- File Chooser -->
     <form>
         Aufgezeichnete Wege zur Kartenansicht auswählen (.json):
         <p> <!-- Absatz -->
@@ -127,10 +113,10 @@
 
     <p></p>
     <label>Auswahl Nutzer:
-       <select id="AuswahlNutzer">
+        <select id="AuswahlNutzer">
             <option value="alle">alle</option>
-       </select>
-   </label>
+        </select>
+    </label>
 
     <p>Auswahl Nutzertyp:</p>
     <fieldset>
@@ -144,8 +130,8 @@
         <label for="eigene Auswahl">eigene Auswahl</label>
     </fieldset>
 
-   <p> <!-- Absatz -->
-   <button onclick="auswahlNutzertyp()" type="button">Nutzerauswahl bestätigen</button>
+    <p> <!-- Absatz -->
+        <button onclick="auswahlNutzertyp()" type="button">Nutzerauswahl bestätigen</button>
 
 </div>
 
@@ -353,45 +339,8 @@
     <input id="umstiegszeitSec" type="number" min="0" max="59" step="1" value="0" >
     <p></p>
 
-    <button onclick="vergleicheWegeGenauer()" type="button">Wege genauer vergleichen</button>
-
-</div>
-
-<div class="box8" id="box8">
-
-    <p><b>Auswahl Vergleichskriterien Grobvergleich</b></p>
-
-    <p>Maximale Abweichung Koordinaten (in Metern): </p>
-    <input type="text" id="maxAbweichungKooGrob" name="maxAbweichungKooGrob" value="1000">
-
-    <p>Maximale Abweichung Distanz (in Metern): </p>
-    <input type="text" id="maxAbweichungDistGrob" name="maxAbweichungDistGrob" value="1000">
-
-    <p>Maximale Abweichung Gesamtdauer (hh:mm:ss): </p>
-    <p></p>
-    <input id="gesamtdauerStu" type="number" min="0" max="23" step="1" value="1" >
-    :
-    <input id="gesamtdauerMin" type="number" min="0" max="59" step="1" value="0" >
-    :
-    <input id="gesamtdauerSec" type="number" min="0" max="59" step="1" value="0" >
-    <p></p>
-
     <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
 
-</div>
-
-<div class="box9" id="box9">
-    <p><b>Ausgabe Grobvergleich: </b></p>
-
-    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
-
-    <p><b>Alle Wegepaare </b></p>
-
-    <output id="AusgabeAlleGrob" ></output>
-
-    <p><b>Dargestellte Wege </b></p>
-
-    <output id="AusgabeGrob" ></output>
 </div>
 
 <div class="box7" id="box7">
@@ -411,8 +360,8 @@
 <!-- Map Object (rechts)-->
 <div class="box5" id="map"></div>
 
-<script src="Script.js"></script>
-<script src="Vergleich.js"></script>
+<script src="Script_1.js"></script>
+<script src="Vergleich_2.js"></script>
 
 
 </body>
