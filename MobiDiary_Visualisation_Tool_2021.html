@@ -323,7 +323,49 @@
 
 </div>
 
+
 <div class="box6" id="box6">
+
+    <p><b>Auswahl Vergleichskriterien Grobvergleich</b></p>
+
+    <p>Maximale Abweichung Start- und Endkoordinaten (in Metern): </p>
+    <input type="text" id="maxAbweichungKooGrob" name="maxAbweichungKooGrob" value="1000">
+
+    <p>Maximale Abweichung Gesamtdistanz (in Metern): </p>
+    <input type="text" id="maxAbweichungDistGrob" name="maxAbweichungDistGrob" value="1000">
+
+    <p>Maximale Abweichung Gesamtdauer (hh:mm:ss): </p>
+    <p></p>
+    <input id="gesamtdauerStu" type="number" min="0" max="23" step="1" value="1" >
+    :
+    <input id="gesamtdauerMin" type="number" min="0" max="59" step="1" value="0" >
+    :
+    <input id="gesamtdauerSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
+    <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
+
+</div>
+
+<div class="box7" id="box7">
+    <p><b>Ausgabe Grobvergleich: </b></p>
+
+    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
+
+    <p><b>Mittelwerte </b></p>
+
+    <output id="AusgabeMittelwerte" ></output>
+
+    <p><b>Alle Wegepaare </b></p>
+
+    <output id="AusgabeAlleGrob" ></output>
+
+    <p><b>Dargestellte Wege </b></p>
+
+    <output id="AusgabeGrob" ></output>
+</div>
+
+<div class="box8" id="box8">
 
     <p><b>Auswahl Vergleichskriterien </b></p>
 
@@ -357,47 +399,14 @@
 
 </div>
 
-<div class="box8" id="box8">
-
-    <p><b>Auswahl Vergleichskriterien Grobvergleich</b></p>
-
-    <p>Maximale Abweichung Koordinaten (in Metern): </p>
-    <input type="text" id="maxAbweichungKooGrob" name="maxAbweichungKooGrob" value="1000">
-
-    <p>Maximale Abweichung Distanz (in Metern): </p>
-    <input type="text" id="maxAbweichungDistGrob" name="maxAbweichungDistGrob" value="1000">
-
-    <p>Maximale Abweichung Gesamtdauer (hh:mm:ss): </p>
-    <p></p>
-    <input id="gesamtdauerStu" type="number" min="0" max="23" step="1" value="1" >
-    :
-    <input id="gesamtdauerMin" type="number" min="0" max="59" step="1" value="0" >
-    :
-    <input id="gesamtdauerSec" type="number" min="0" max="59" step="1" value="0" >
-    <p></p>
-
-    <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
-
-</div>
-
 <div class="box9" id="box9">
-    <p><b>Ausgabe Grobvergleich: </b></p>
-
-    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
-
-    <p><b>Alle Wegepaare </b></p>
-
-    <output id="AusgabeAlleGrob" ></output>
-
-    <p><b>Dargestellte Wege </b></p>
-
-    <output id="AusgabeGrob" ></output>
-</div>
-
-<div class="box7" id="box7">
     <p><b>Ausgabe: </b></p>
 
     <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
+
+    <p><b>Mittelwerte </b></p>
+
+    <output id="AusgabeMittelwerteVgl" ></output>
 
     <p><b>Alle Wegepaare </b></p>
 
@@ -414,6 +423,8 @@
 <script src="Script.js"></script>
 <script src="Vergleich.js"></script>
 
+<!-- Hilfsdatei -->
+<script src="Test_2.js"></script>
 
 </body>
 
