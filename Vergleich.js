@@ -449,22 +449,132 @@ function bildeMittelwertZahl(array) {
     return rueckgabe;
 }
 
-//TODO bildeMittelwertDate()
 function bildeMittelwertDate(array) {
 
+    var rueckgabe = new Date();
     var anzahl = 0;
-    var werte = 0;
+    var werte = new Date();
+    werte.setHours(0,0,0);
 
     array.forEach(function(element){
 
+        console.log("Sammelvariable Zeit");
+        console.log(werte);
+        var stuS = werte.getHours();
+        var minS = werte.getMinutes();
+        var secS = werte.getSeconds();
+        var tagS = werte.getDate();
 
-        werte = werte + element;
+        console.log("neues Datum");
+        console.log(element);
+        var stu = element.getHours();
+        var min = element.getMinutes();
+        var sec = element.getSeconds();
+
+        var secNeu = 0;
+        var minNeu = 0;
+        var stuNeu = 0;
+
+        var secNeuUe = 0;
+        var minNeuUe = 0;
+        var stuNeuUe = 0;
+
+        var secUebertrag = 0;
+        var minUebertrag = 0;
+        var stuUebertrag = 0;
+
+        secNeu = secS + sec;
+        console.log("secNeu");
+        console.log(secNeu);
+
+        if(secNeu > 59){
+            if (secNeu == 60){
+                secNeu = 0;
+                minNeuUe = 1;
+            }
+            secUebertrag = secNeu - 60;
+            secNeu = 0;
+            minNeuUe = 1;
+            secNeu = secNeu + secUebertrag;
+        }
+
+        minNeu = minS + minNeuUe + min;
+        console.log("minNeu");
+        console.log(minNeu);
+
+        if(minNeu > 59){
+            if (minNeu == 60){
+                minNeu = 0;
+                stuNeuUe = 1;
+            }
+            minUebertrag = minNeu - 60;
+            minNeu = 0;
+            stuNeuUe = 1;
+            minNeu = minNeu + minUebertrag;
+        }
+
+        stuNeu = stuS + stuNeuUe + stu;
+        console.log("stuNeu");
+        console.log(stuNeu);
+
+        var taguebergang = false;
+
+        if(stuNeu > 24){
+            taguebergang = true;
+            tagS = tagS + 1;
+        }
+
+        if(taguebergang == true){
+            werte.setDate(tagS);
+            console.log(tagS, stuNeu, minNeu, secNeu);
+            werte.setHours(stuNeu, minNeu, secNeu);
+
+        } else {
+            console.log(tagS, stuNeu, minNeu, secNeu);
+            werte.setHours(stuNeu, minNeu, secNeu);
+        }
+
+        console.log("werte");
+        console.log(werte);
+
         anzahl = anzahl + 1;
 
     });
 
-    var rueckgabe = werte/anzahl;
+    console.log("werte");
+    console.log(werte);
 
+    var werteMS = werte.getTime();
+    console.log("werteMS");
+    console.log(werteMS);
+
+    console.log("anzahl");
+    console.log(anzahl);
+
+    var stuD = werte.getHours();
+    var minD = werte.getMinutes();
+    var secD = werte.getSeconds();
+
+   var secDAlle = stuD*60*60 + minD*60 + secD;
+    console.log("secDAlle");
+    console.log(secDAlle);
+
+    var rueckgabeS = secDAlle/anzahl;
+
+    function fuehrendeNullSec(wert) {
+        if (wert < 10) return "0" + parseInt(wert);
+        else return parseInt(wert);
+    }
+
+    //TODO Division Zeit Mittelwert Rundung?
+    var stuR = fuehrendeNullSec((rueckgabeS/60/60)%24);
+    var minR = fuehrendeNullSec((rueckgabeS/60)%60);
+    var secR = fuehrendeNullSec(rueckgabeS%60);
+
+    rueckgabe.setHours(stuR, minR, secR);
+
+    console.log("rueckgabe");
+    console.log(rueckgabe);
 
     return rueckgabe;
 }
@@ -2318,7 +2428,6 @@ function millisekundenInDateWandeln(wertMS, datum) {
         else return parseInt(wert);
     }
 
-    //TODO millisekundenInDateWandeln() stu, min und sec prüfen
     var jahr = datum.getUTCFullYear();
     var monat = datum.getMonth();
     var tag = datum.getDate();

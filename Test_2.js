@@ -12,6 +12,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
 
         //Mittelwert Koordinaten
+        console.log("Mittelwert Koordinaten");
         var weg1Zaehler = "";
         var weg2Zaehler = "";
 
@@ -59,6 +60,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
         }
 
         //Mittelwert Koordinaten Umstieg
+        console.log("Koordinaten Umstieg");
         console.log("wegedatenKoordinaten[weg1Zaehler]");
         console.log(wegedatenKoordinaten[weg1Zaehler]);
         console.log("wegedatenKoordinaten[weg1Zaehler].length");
@@ -117,6 +119,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
         }
 
         //Mittelwert Startzeit
+        console.log("Mittelwert Startzeit");
         var dateStart = new Date(Date.now());
         console.log("dateStart");
         console.log(dateStart);
@@ -180,6 +183,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
         werteStartzeitAlle.push(zeitdiffDate);
 
         //Mittelwert Umstiegszeit
+        console.log("Mittelwert Umstiegszeit");
         if(wegedatenAbfahrtAnkunft[weg1Zaehler].length == wegedatenAbfahrtAnkunft[weg2Zaehler].length){
 
             for( var m = 0; m < wegedatenAbfahrtAnkunft[weg1Zaehler].length-2; m = m + 2){
@@ -229,6 +233,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
         }
 
         //Mittelwert Wegezweck
+        console.log("Mittelwert Wegezweck");
         var wegeZweck1= wegedaten[weg1Zaehler]["Wegezweck"];
 
         //console.log(weg1Zaehler);
@@ -244,6 +249,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
         werteWegezweckAlle.push({"Wegezweck 1": wegeZweck1, "Wegezweck 2": wegeZweck2});
 
         //Mittelwert Verkehrsmittel
+        console.log("Mittelwert Verkehrsmittel");
         var zaehlerwegedatenVM1 = "";
         var zaehlerwegedatenVM2 = "";
         for (var z = 0; z < wegedatenVerkehrsmittel.length; z++){
@@ -285,6 +291,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
     });
 
+    console.log("Bilde Mittelwerte Berechnung");
     var mittelwertKoordinatenAlle = bildeMittelwertZahl(werteKoordinatenAlle);
 
     mittelwerteWegepaareAlle.push({"Koordinaten": mittelwertKoordinatenAlle});
@@ -301,28 +308,54 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
     var mittelwertStartzeitAlle = bildeMittelwertDate(werteStartzeitAlle);
 
-    mittelwerteWegepaareAlle.push({"Startzeit": mittelwertStartzeitAlle});
+    var stuSt = mittelwertStartzeitAlle.getHours();
+    var minSt = mittelwertStartzeitAlle.getMinutes();
+    var secSt = mittelwertStartzeitAlle.getSeconds();
+
+    var mittelwertStartzeitAlleText = stuSt + ":" + minSt + ":" + secSt;
+
+    mittelwerteWegepaareAlle.push({"Startzeit": mittelwertStartzeitAlleText});
 
     console.log("werteStartzeitAlle");
     console.log(werteStartzeitAlle);
 
     var mittelwertUmstiegszeitAlle = bildeMittelwertDate(werteUmsteigszeitAlle);
 
-    mittelwerteWegepaareAlle.push({"Umsteigszeit": mittelwertUmstiegszeitAlle});
+    var stuUm = mittelwertUmstiegszeitAlle.getHours();
+    var minUm = mittelwertUmstiegszeitAlle.getMinutes();
+    var secUm = mittelwertUmstiegszeitAlle.getSeconds();
+
+    var mittelwertUmstiegszeitAlleText = stuUm + ":" + minUm + ":" + secUm;
+
+    mittelwerteWegepaareAlle.push({"Umsteigszeit": mittelwertUmstiegszeitAlleText});
 
     console.log("werteUmstiegszeitAlle");
     console.log(werteUmsteigszeitAlle);
 
     var mittelwertWegezweckAlle = bildeMittelwertWegezweck(werteWegezweckAlle);
 
-    mittelwerteWegepaareAlle.push({"Wegezweck": mittelwertWegezweckAlle});
+    //TODO Copy zu Ausgabe
+    var mittelwertWegezweckAlleText = "";
+    mittelwertWegezweckAlle.forEach(function(element){
+        var text = "Wegezweck 1:" + " " + element["Wegezweck 1"] + " " + "Wegezweck 2:" + " " + element["Wegezweck 2"] + " " + "Anzahl:" + " " + element["Anzahl"];
+        mittelwertWegezweckAlleText = mittelwertWegezweckAlleText + text;
+    });
+
+    mittelwerteWegepaareAlle.push({"Wegezweck": mittelwertWegezweckAlleText});
 
     console.log("werteWegezweckAlle");
     console.log(werteWegezweckAlle);
 
     var mittelwertVerkehrsmittelAlle = bildeMittelwertVerkehrsmittel(werteVerkehrsmittelAlle);
 
-    mittelwerteWegepaareAlle.push({"Verkehrsmittel": mittelwertVerkehrsmittelAlle});
+    //TODO Copy zu Ausgabe
+    var mittelwertVerkehrsmittelAlleText = "";
+    mittelwertVerkehrsmittelAlle.forEach(function(element){
+        var text = "Verkehrsmittel 1:" + " " + element["Verkehrsmittel 1"] + " " + "Verkehrsmittel 2:" + " " +"<p></p>"+ element["Verkehrsmittel 2"] + " " + "Anzahl:" + " " + element["Anzahl"];
+        mittelwertVerkehrsmittelAlleText = mittelwertVerkehrsmittelAlleText + text;
+    });
+
+    mittelwerteWegepaareAlle.push({"Verkehrsmittel": mittelwertVerkehrsmittelAlleText});
 
     console.log("werteVerkehrsmittelAlle");
     console.log(werteVerkehrsmittelAlle);
