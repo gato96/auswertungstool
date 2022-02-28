@@ -72,6 +72,13 @@
             width: 50%;
             box-sizing: border-box;
         }
+        .box10 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
         #map {
             position: absolute;
             top: 0;
@@ -374,7 +381,7 @@
 
     <p>Maximale Abweichung Startzeit (hh:mm:ss): </p>
     <p></p>
-    <input id="startzeitraumStu" type="number" min="0" max="23" step="1" value="1" >
+    <input id="startzeitraumStu" type="number" min="0" max="23" step="1" value="2" >
     :
     <input id="startzeitraumMin" type="number" min="0" max="59" step="1" value="0" >
     :
@@ -400,6 +407,59 @@
 </div>
 
 <div class="box9" id="box9">
+    <p><b>Ergebnisse Vergleich: </b></p>
+
+    <output id="AusgabeErgebnis" ></output>
+
+    <p>Auswahl Vergleiche:</p>
+    <fieldset>
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Koordinaten">
+                    Koordinaten
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Umstiegsweg">
+                    Umstiegsweg
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Startzeit">
+                    Startzeit
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Umstiegsdauer">
+                    Umstiegsdauer
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Wegezweck">
+                    Wegezweck
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Verkehrsmittel">
+                    Verkehrsmittel
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <p> <!-- Absatz -->
+        <button onclick="wendeVergleicheAn()" type="button">Ausgewählte Vergleiche anwenden</button>
+
+
+</div>
+
+<div class="box10" id="box10">
     <p><b>Ausgabe: </b></p>
 
     <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>

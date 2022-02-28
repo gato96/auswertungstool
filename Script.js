@@ -1245,7 +1245,7 @@ function pruefeWegedaten(user, wegezweck, startzeit, verkehrsmittel, wegeID){
 function zeichneWeg(wegeID, verkehrsmittel){
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
-    document.getElementById("box9").style.display = "block";
+    document.getElementById("box10").style.display = "block";
 
     // load selected JSON Files
     let filesAuswahl = document.getElementById("jsonFiles").files;

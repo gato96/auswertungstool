@@ -94,6 +94,30 @@ for (var a = 0; a < wegeIDVglWegepaare.length; a++) {
     wegeIDVglWegepaare[zaehler]["UserID"] = "";
 }
 
+var wegeIDVglWegepaareFilter = new Array();
+for (var a = 0; a < wegeIDVglWegepaareFilter.length; a++) {
+    wegeIDVglWegepaareFilter[a] = new Array(3);
+    wegeIDVglWegepaareFilter[zaehler]["WegeID 1"] = "";
+    wegeIDVglWegepaareFilter[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegepaareFilter[zaehler]["UserID"] = "";
+}
+
+var wegeIDVglWegepaareFilter1 = new Array();
+for (var a = 0; a < wegeIDVglWegepaareFilter1.length; a++) {
+    wegeIDVglWegepaareFilter1[a] = new Array(3);
+    wegeIDVglWegepaareFilter1[zaehler]["WegeID 1"] = "";
+    wegeIDVglWegepaareFilter1[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegepaareFilter1[zaehler]["UserID"] = "";
+}
+
+var wegeIDVglWegepaareFilterEinfach = new Array();
+for (var a = 0; a < wegeIDVglWegepaareFilterEinfach.length; a++) {
+    wegeIDVglWegepaareFilterEinfach[a] = new Array(3);
+    wegeIDVglWegepaareFilterEinfach[zaehler]["WegeID 1"] = "";
+    wegeIDVglWegepaareFilterEinfach[zaehler]["WegeID 2"] = "";
+    wegeIDVglWegepaareFilterEinfach[zaehler]["UserID"] = "";
+}
+
 var wegeIDVglWegepaareAnfang = new Array();
 for (var k = 0; k < wegeIDVglWegepaareAnfang.length; k++) {
     wegeIDVglWegepaareAnfang[k] = new Array(4);
@@ -234,44 +258,51 @@ function vergleicheWege() {
 
 function vergleicheWegeGenauer(){
 
-    //TODO Mittelwerte und Ergebnis der Filter am Ende vergleichen
+    //alle Vergleiche mit allen Wegepaaren, die dem Grobvergleich entsprechen
     console.log("Vergleich Koordinaten");
-    wegeIDVglWegepaare = vergleicheKoordinaten(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare = vergleicheKoordinaten(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 = vergleicheKoordinaten(wegeIDVglWegepaare);
     console.log("Ende Vergleich Koordinaten");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Vergleich Koordinaten Umstieg");
-    wegeIDVglWegepaare = vergleicheKoordinatenUmstieg(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare = vergleicheKoordinatenUmstieg(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 = vergleicheKoordinatenUmstieg(wegeIDVglWegepaare);
     console.log("Ende Vergleich Koordinaten Umstieg");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Vergleich Startzeit");
-    wegeIDVglWegepaare =  vergleicheStartzeit(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare =  vergleicheStartzeit(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 =  vergleicheStartzeit(wegeIDVglWegepaare);
     console.log("Ende Vergleich Startzeit");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Vergleich Umstiegszeit");
-    wegeIDVglWegepaare =  vergleicheUmstiegszeit(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare =  vergleicheUmstiegszeit(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 =  vergleicheUmstiegszeit(wegeIDVglWegepaare);
     console.log("Ende Vergleich Umstiegszeit");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Vergleich Wegezweck");
-    wegeIDVglWegepaare =  vergleicheWegezweck(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare =  vergleicheWegezweck(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 =  vergleicheWegezweck(wegeIDVglWegepaare);
     console.log("Ende Vergleich Wegezweck");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Vergleich Verkehrsmittel");
-    wegeIDVglWegepaare = vergleicheVerkehrsmittel(wegeIDVglWegepaare);
+    //wegeIDVglWegepaare = vergleicheVerkehrsmittel(wegeIDVglWegepaare);
+    wegeIDVglWegepaareFilter1 = vergleicheVerkehrsmittel(wegeIDVglWegepaare);
     console.log("Ende Vergleich Verkehrsmittel");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
     console.log("Ende aller Vergleiche");
+
     console.log("wegeIDVglWegepaareAnfang");
     console.log(wegeIDVglWegepaareAnfang);
 
@@ -280,13 +311,25 @@ function vergleicheWegeGenauer(){
 
     //Ende Vergleiche
 
-    //Ausgabe auf Karte und Ausgabe Wegeinformationen
+    //Vergleiche Ergebnisarrays miteinander und suche Wege, die am Ende der Auswahl entsprechen sollen
+    console.log("Wähle Wege aus");
+    waehleWege(wegeIDVglWegepaare, wegeIDVglKoordinaten, wegeIDVglKoordinatenUmstieg, wegeIDVglStartzeit, wegeIDVglDauerUmstieg, wegeIDVglWegezweck, wegeIDVglVerkehrsmittel);
 
-    console.log("Anzeige und Ausgabe Wegedaten");
     console.log("wegeIDVglWegepaare");
     console.log(wegeIDVglWegepaare);
 
-    zeichneWegVgl(wegeIDVglWegepaare);
+}
+
+function wendeVergleicheAn() {
+
+    wegeIDVglWegepaareFilter = sammlePassendeWegepaare();
+
+    //Ausgabe auf Karte und Ausgabe Wegeinformationen
+    console.log("Anzeige und Ausgabe Wegedaten");
+    console.log("wegeIDVglWegepaareFilter");
+    console.log(wegeIDVglWegepaareFilter);
+
+    zeichneWegVgl(wegeIDVglWegepaareFilter);
 
 }
 
@@ -428,6 +471,7 @@ function befuelleArraywegeIDVglWegepaareAnfang(wegeIDVglWegepaare, wegeIDVglWege
 //X MIttelwertfuntion
 
 /*function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
+    //TODO Funktion bilde Mittelwert einfügen
 
 }//Ende bildeMittelwert()
  */
@@ -1481,6 +1525,7 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
             console.log("Startzeit Wege innerhalb Zeitraum");
         } else {
             wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Startzeit stimmt nicht überein"});
+            console.log("Startzeit stimmt nicht überein");
         }
 
         /*//Zeitraum "von" mit Stunden, Minuten, Sekunden von Weg1 und Datum von Weg2 anlegen
@@ -2138,7 +2183,7 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 function zeichneWegVgl(wegeIDVglWegepaare){
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
-    document.getElementById("box9").style.display = "block";
+    document.getElementById("box10").style.display = "block";
 
 
     //Ausgabe aller Wegepaare
