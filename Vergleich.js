@@ -110,14 +110,6 @@ for (var a = 0; a < wegeIDVglWegepaareFilter1.length; a++) {
     wegeIDVglWegepaareFilter1[zaehler]["UserID"] = "";
 }
 
-var wegeIDVglWegepaareFilterEinfach = new Array();
-for (var a = 0; a < wegeIDVglWegepaareFilterEinfach.length; a++) {
-    wegeIDVglWegepaareFilterEinfach[a] = new Array(3);
-    wegeIDVglWegepaareFilterEinfach[zaehler]["WegeID 1"] = "";
-    wegeIDVglWegepaareFilterEinfach[zaehler]["WegeID 2"] = "";
-    wegeIDVglWegepaareFilterEinfach[zaehler]["UserID"] = "";
-}
-
 var wegeIDVglWegepaareAnfang = new Array();
 for (var k = 0; k < wegeIDVglWegepaareAnfang.length; k++) {
     wegeIDVglWegepaareAnfang[k] = new Array(4);
