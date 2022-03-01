@@ -408,6 +408,19 @@ function sammlePassendeWegepaare(){
 
     console.log("sammlePassendeWegepaare");
 
+    console.log("wegeIDVglKoordinaten");
+    console.log(wegeIDVglKoordinaten);
+    console.log("wegeIDVglKoordinatenUmstieg");
+    console.log(wegeIDVglKoordinatenUmstieg);
+    console.log("wegeIDVglStartzeit");
+    console.log(wegeIDVglStartzeit);
+    console.log("wegeIDVglDauerUmstieg");
+    console.log(wegeIDVglDauerUmstieg);
+    console.log("wegeIDVglWegezweck");
+    console.log(wegeIDVglWegezweck);
+    console.log("wegeIDVglVerkehrsmittel");
+    console.log(wegeIDVglVerkehrsmittel);
+
     // Abfrage nach gewählten Vergleichsmethoden
     var checkboxChecked = new Array();
     var checkboxesvergleichsfilter = document.getElementsByName("vergleichsfilter");
