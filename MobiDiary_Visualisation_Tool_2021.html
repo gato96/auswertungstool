@@ -80,7 +80,7 @@
             box-sizing: border-box;
         }
         #map {
-            position: absolute;
+            position: fixed;
             top: 0;
             bottom: 0;
             right: 0;
@@ -335,6 +335,14 @@
 
     <p><b>Auswahl Vergleichskriterien Grobvergleich</b></p>
 
+    <p>Gleiche NutzerID:</p>
+    <fieldset>
+        <input type="radio" id="ja" name="gleicheNutzerID" value="ja" checked>
+        <label for="ja">ja</label>
+        <input type="radio" id="nein" name="gleicheNutzerID" value="nein">
+        <label for="nein">nein</label>
+    </fieldset>
+
     <p>Maximale Abweichung Start- und Endkoordinaten (in Metern): </p>
     <input type="text" id="maxAbweichungKooGrob" name="maxAbweichungKooGrob" value="1000">
 
@@ -464,13 +472,15 @@
 
     <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
 
-    <p><b>Mittelwerte </b></p>
-
-    <output id="AusgabeMittelwerteVgl" ></output>
-
     <p><b>Alle Wegepaare </b></p>
 
     <output id="AusgabeAlle" ></output>
+
+    <output id="AusgabeErgebnisFilter" ></output>
+
+    <p><b>Gewählte Vergleichskriterien </b></p>
+
+    <output id="AusgabeGewaehlteFilter" ></output>
 
     <p><b>Dargestellte Wege </b></p>
 

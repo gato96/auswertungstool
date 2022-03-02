@@ -1245,6 +1245,7 @@ function pruefeWegedaten(user, wegezweck, startzeit, verkehrsmittel, wegeID){
 function zeichneWeg(wegeID, verkehrsmittel){
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
+    //TODO Optik neue Ausgabebox für Variante ohne Vergleiche Wege?
     document.getElementById("box10").style.display = "block";
 
     // load selected JSON Files
@@ -1406,6 +1407,9 @@ function zeichneWeg(wegeID, verkehrsmittel){
 
 function wegedatenHerunterladen() {
 
+    //TODO Funktionalität herunterladen der gesamten Ausgabe,
+    // entweder alle Ausgaben gleich mit unterschiedlichem Child oder
+    // alle Ausgaben im Array speichern
     var a = 0;
     wegeAnz = Array.from(document.getElementById("Ausgabe").children);
     wegeAnz.forEach(wegAnzeige=>{
