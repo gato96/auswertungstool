@@ -135,7 +135,7 @@ for (var m = 0; m < mittelwerteWegepaareAlle.length; m++) {
     mittelwerteWegepaareAlle[zaehler]["Koordinaten"] = "";
     mittelwerteWegepaareAlle[zaehler]["Koordinaten Umstieg"] = "";
     mittelwerteWegepaareAlle[zaehler]["Startzeit"] = "";
-    mittelwerteWegepaareAlle[zaehler]["Umsteigszeit"] = "";
+    mittelwerteWegepaareAlle[zaehler]["Umstiegszeit"] = "";
     mittelwerteWegepaareAlle[zaehler]["Wegezweck"] = "";
     mittelwerteWegepaareAlle[zaehler]["Verkehrsmittel"] = "";
 }
@@ -775,12 +775,17 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
     console.log("Bilde Mittelwerte Berechnung");
     var mittelwertKoordinatenAlle = bildeMittelwertZahl(werteKoordinatenAlle);
 
+    console.log("mittelwertKoordinatenAlle");
+    console.log(mittelwertKoordinatenAlle);
+
     mittelwerteWegepaareAlle.push({"Koordinaten": mittelwertKoordinatenAlle});
 
     console.log("werteKoordinatenAlle");
     console.log(werteKoordinatenAlle);
 
     var mittelwertKoordinatenUmstiegAlle = bildeMittelwertZahl(werteKoordinatenUmstiegAlle);
+    console.log("mittelwertKoordinatenUmstiegAlle");
+    console.log(mittelwertKoordinatenUmstiegAlle);
 
     mittelwerteWegepaareAlle.push({"Koordinaten Umstieg": mittelwertKoordinatenUmstiegAlle});
 
@@ -808,7 +813,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
     var mittelwertUmstiegszeitAlleText = stuUm + ":" + minUm + ":" + secUm;
 
-    mittelwerteWegepaareAlle.push({"Umsteigszeit": mittelwertUmstiegszeitAlleText});
+    mittelwerteWegepaareAlle.push({"Umstiegszeit": mittelwertUmstiegszeitAlleText});
 
     console.log("werteUmstiegszeitAlle");
     console.log(werteUmsteigszeitAlle);
@@ -817,7 +822,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
     var mittelwertWegezweckAlleText = "";
     mittelwertWegezweckAlle.forEach(function(element){
-        var text = "Wegezweck 1:" + " " + element["Wegezweck 1"] + " " + "Wegezweck 2:" + " " + element["Wegezweck 2"] + " " + "Anzahl:" + " " + element["Anzahl"];
+        var text = "Wegezweck 1:" + " " + element["Wegezweck 1"] + " " +"|"+ " " + "Wegezweck 2:" + " " + element["Wegezweck 2"] + " " + "||"+ " " + "Anzahl:" + " " + element["Anzahl"];
         mittelwertWegezweckAlleText = mittelwertWegezweckAlleText + text;
     });
 
@@ -830,7 +835,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
     var mittelwertVerkehrsmittelAlleText = "";
     mittelwertVerkehrsmittelAlle.forEach(function(element){
-        var text = "Verkehrsmittel 1:" + " " + element["Verkehrsmittel 1"] + " " + "Verkehrsmittel 2:" + " " +"<p></p>"+ element["Verkehrsmittel 2"] + " " + "Anzahl:" + " " + element["Anzahl"];
+        var text = "Verkehrsmittel 1:" + " " + element["Verkehrsmittel 1"] + " " +"|"+ " " + "Verkehrsmittel 2:" + " " + element["Verkehrsmittel 2"] + " " +"||"+ " " + "Anzahl:" + " " + element["Anzahl"];
         mittelwertVerkehrsmittelAlleText = mittelwertVerkehrsmittelAlleText + text;
     });
 
@@ -2378,15 +2383,21 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
     console.log("mittelwerteWegepaareAlle");
     console.log(mittelwerteWegepaareAlle);
 
-    //TODO Funktionalität Ausgabe zeigt nicht alle Werte an
+    console.log(mittelwerteWegepaareAlle[0]["Koordinaten"]);
+    console.log(mittelwerteWegepaareAlle[1]["Koordinaten Umstieg"]);
+    console.log(mittelwerteWegepaareAlle[2]["Startzeit"]);
+    console.log(mittelwerteWegepaareAlle[3]["Umstiegszeit"]);
+    console.log(mittelwerteWegepaareAlle[4]["Wegezweck"]);
+    console.log(mittelwerteWegepaareAlle[5]["Verkehrsmittel"]);
+
     //Ausgabe alle Mittelwerte
     var mittelwerte = "<b class='content'>Mittelwerte alle Wegepaare: </b>"
         + "<br class='content'>Differenz Koordinaten: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Koordinaten"] +"</span>"
-        + "<br class='content'>Differenz Koordinaten Umstieg: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Koordinaten Umstieg"] +"</span>"
-        + "<br class='content'>Differenz Startzeit: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Startzeit"] +"</span>"
-        + "<br class='content'>Differenz Umstiegszeit: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Umstiegszeit"] +"</span>"
-        + "<br class='content'>Differenz Wegezweck: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Wegezweck"] +"</span>"
-        + "<br class='content'>Differenz Verkehrsmittel: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[0]["Verkehrsmittel"] +"</span>" +"<p></p>";
+        + "<br class='content'>Differenz Koordinaten Umstieg: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[1]["Koordinaten Umstieg"] +"</span>"
+        + "<br class='content'>Differenz Startzeit: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[2]["Startzeit"] +"</span>"
+        + "<br class='content'>Differenz Umstiegszeit: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[3]["Umstiegszeit"] +"</span>"
+        + "<br class='content'>Differenz Wegezweck: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[4]["Wegezweck"] +"</span>"
+        + "<br class='content'>Differenz Verkehrsmittel: </br>" + "<span class='content'>"+ mittelwerteWegepaareAlle[5]["Verkehrsmittel"] +"</span>" +"<p></p>";
     var selM = document.getElementById("AusgabeMittelwerte");
     var mittel = document.createElement('Mittelwerte');
     mittel.innerHTML = mittelwerte;
@@ -2698,7 +2709,6 @@ function zeichneWegVgl(wegeIDVglWegepaare){
     sel.appendChild(erg);
 
     //Ausgabe aller Wegepaare, die Vergleichskriterien entsprechen und Darstellung der Wege auf der Karte
-    //TODO Optik Zeichne Weg evtl. Darstellung auf zwei Karten nebeneinander, Wegeinfos darunter
 
     var anzahlVgl = wegeIDVglWegepaare.length;
     var ausgabeAnzahlVgl = "<b class='content'>Anzahl Wegepaare: </b>" + "<span class='content'>"+ anzahlVgl +"</span>" +"<p></p>";
@@ -2973,9 +2983,9 @@ function waehleWege(wegeIDVglWegepaare, wegeIDVglKoordinaten, wegeIDVglKoordinat
 
     document.getElementById("box9").style.display = "block";
 
-    //TODO Funktionalität Linien auf Karte löschen
+    //TODO Funktionalität Linien auf Karte löschen, damit neue Wege dargestellt werden
     //var x = document.getElementById("map");
-    //map.clear();
+    //x.clear();
     //console.log("map.clear();");
     //polyline.setMap(null);
 
