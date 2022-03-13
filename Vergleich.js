@@ -202,6 +202,7 @@ var gewaehlteFilter = new Array();
 // arrayList of PolyLine Coordinates
 var listGeoJson = [{"type":"FeatureCollection", "features": []}];
 var polyline;
+var polylines = [];
 
 //Ende Definition Arrays
 
@@ -2600,14 +2601,11 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 
                                     // creating poly line options
                                     var polyLineOptions = {color: get_random_color()};
-                                    // creating polyline
-                                    /*var polyline = L.polyline(coordinateTuples, polyLineOptions);
-                                    // adding multi poly-line to map
-                                    polyline.addTo(map);
 
-                                     */
+                                    polyline = new L.Polyline(coordinateTuples, polyLineOptions).addTo(map);
+                                    polylines.push(polyline);
 
-                                    console.log("coordinateTuples");
+                                    /*console.log("coordinateTuples");
                                     console.log(coordinateTuples);
 
                                     var anzahlWeg = listGeoJson[0].features.length;
@@ -2616,26 +2614,7 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
                                     console.log("listGeoJson");
                                     console.log(listGeoJson);
 
-                                    // find current line based on their line name and add PolyLine
-                                    //TODO addTo(map)
-                                    for (var z = 0; z < listGeoJson.length; z++){
-                                        polyline = new L.geoJSON(listGeoJson, {
-                                            style: function(feature) {
-
-                                                if (feature.properties.name === z){
-                                                    console.log(feature.properties.name === z);
-                                                    console.log(farbe);
-                                                    return{color: farbe, weight: 9}
-                                                }
-                                                // other lines are gray colored
-                                                else {return{color: "#d3d3d3", "opacity": 0.25}}
-                                                // other lines are displayed colored
-                                                //else {return{color: feature.properties.colorCode,"opacity": 0.1}}
-                                            }
-                                        }).addTo(map);
-                                    }
-
-
+                                     */
 
                                     // speichere Wegeinfo für Ausgabe
 
@@ -2680,8 +2659,12 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 
 function zeichneWegVgl(wegeIDVglWegepaare){
 
-    // remove polylines from map and draw a new one
-    map.removeLayer(polyline);
+    console.log("zeichneWegVgl");
+
+    // alle Wege von der Karte löschen
+    polylines.forEach(function (item) {
+        map.removeLayer(item)
+    });
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
     document.getElementById("box10").style.display = "block";
@@ -2909,32 +2892,9 @@ function zeichneWegVgl(wegeIDVglWegepaare){
 
                                     // creating poly line options
                                     var polyLineOptions = {color: get_random_color()};
-                                    // creating polyline
-                                    /*var polyline = L.polyline(coordinateTuples, polyLineOptions);
-                                    // adding multi poly-line to map
-                                    polyline.addTo(map);
 
-                                     */
-
-                                    // periodically find current line based on their line name and add PolyLine
-                                    function findLine () {
-                                        // remove polylines from map and draw a new one
-                                        map.removeLayer(polyline)
-                                        polyline = new L.polyline(coordinateTuples, {
-                                            style: function(feature) {
-                                                if (feature.properties.name == line){
-                                                    //console.log(feature.properties.name + " " + line)
-                                                    return{color: polyLineOptions.color, weight: 9}
-                                                }
-                                                // other lines are gray colored
-                                                else {return{color: "#d3d3d3", "opacity": 0.25}}
-                                                // other lines are displayd colored
-                                                //else {return{color: feature.properties.colorCode,"opacity": 0.1}}
-                                            }
-                                        }).addTo(map);
-                                    }
-
-                                    findLine();
+                                    polyline = new L.Polyline(coordinateTuples, polyLineOptions).addTo(map);
+                                    polylines.push(polyline);
 
                                     // speichere Wegeinfo für Ausgabe
 
@@ -3044,14 +3004,7 @@ function waehleWege(wegeIDVglWegepaare, wegeIDVglKoordinaten, wegeIDVglKoordinat
 
     document.getElementById("box9").style.display = "block";
 
-
     console.log("waehleWege()");
-    //TODO Funktionalität Linien auf Karte löschen, damit neue Wege dargestellt werden
-    //var x = document.getElementById("map");
-    //x.clear();
-    //console.log("map.clear();");
-    //polyline.setMap(null);
-
 
     //Anzahl der Wegepaare, die Vergleichsfiltern entsprechen
     console.log("wegeIDVglWegepaare.length");
