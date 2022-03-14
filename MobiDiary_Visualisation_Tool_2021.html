@@ -46,13 +46,48 @@
         }
         .box6 {
             display: none;
-            float: left;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .box7 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .box8 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .box9 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .box10 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .box11 {
+            display: none;
+            float: down;
             padding: 10px;
             width: 50%;
             box-sizing: border-box;
         }
         #map {
-            position: absolute;
+            position: fixed;
             top: 0;
             bottom: 0;
             right: 0;
@@ -66,7 +101,6 @@
 
 <!-- Text (links)-->
 <div class="box1">
-    <img src="Dabbility_logo_kopie.png" width="200" height="auto" alt="Dabbility">
     <p> <!-- Absatz -->
     <b>Auswertungstool Wegedaten MobiDiary 2021</b>
     <p> <!-- Absatz -->
@@ -109,7 +143,6 @@
     <label>Auswahl Nutzer:
        <select id="AuswahlNutzer">
             <option value="alle">alle</option>
-
        </select>
    </label>
 
@@ -304,7 +337,165 @@
 
 </div>
 
+
 <div class="box6" id="box6">
+
+    <p><b>Auswahl Vergleichskriterien Grobvergleich</b></p>
+
+    <p>Gleiche NutzerID:</p>
+    <fieldset>
+        <input type="radio" id="ja" name="gleicheNutzerID" value="ja" checked>
+        <label for="ja">ja</label>
+        <input type="radio" id="nein" name="gleicheNutzerID" value="nein">
+        <label for="nein">nein</label>
+    </fieldset>
+
+    <p>Maximale Abweichung Start- und Endkoordinaten (in Metern): </p>
+    <input type="text" id="maxAbweichungKooGrob" name="maxAbweichungKooGrob" value="1000">
+
+    <p>Maximale Abweichung Gesamtdistanz (in Metern): </p>
+    <input type="text" id="maxAbweichungDistGrob" name="maxAbweichungDistGrob" value="1000">
+
+    <p>Maximale Abweichung Gesamtdauer (hh:mm:ss): </p>
+    <p></p>
+    <input id="gesamtdauerStu" type="number" min="0" max="23" step="1" value="1" >
+    :
+    <input id="gesamtdauerMin" type="number" min="0" max="59" step="1" value="0" >
+    :
+    <input id="gesamtdauerSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
+    <button onclick="vergleicheWege()" type="button">Wege vergleichen</button>
+
+</div>
+
+<div class="box7" id="box7">
+    <p><b>Ausgabe Grobvergleich: </b></p>
+
+    <button onclick="wegedatenHerunterladenGrob()" type="button">Wegedaten herunterladen</button>
+
+    <p><b>Mittelwerte </b></p>
+
+    <output id="AusgabeMittelwerte" ></output>
+
+    <p><b>Alle Wegepaare </b></p>
+
+    <output id="AusgabeAlleGrob" ></output>
+
+    <p><b>Dargestellte Wege </b></p>
+
+    <output id="AusgabeGrob" ></output>
+</div>
+
+<div class="box8" id="box8">
+
+    <p><b>Auswahl Vergleichskriterien </b></p>
+
+    <p>Maximale Abweichung Koordinaten (in Metern): </p>
+    <input type="text" id="maxAbweichung" name="maxAbweichung" value="1000">
+
+    <p>Maximale Abweichung Startzeit (hh:mm:ss): </p>
+    <p></p>
+    <input id="startzeitraumStu" type="number" min="0" max="23" step="1" value="2" >
+    :
+    <input id="startzeitraumMin" type="number" min="0" max="59" step="1" value="0" >
+    :
+    <input id="startzeitraumSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
+    <p>Maximale Abweichung Koordinaten am Umstiegsort (in Metern): </p>
+    <p>(Vergleich Distanz Punkt A zu Punkt B zwischen beiden Wegen) </p>
+    <input type="text" id="maxAbweichungUmstieg" name="maxAbweichungUmstieg" value="500">
+
+    <p>Maximale Abweichung der Umstiegszeit zwischen den WayStages (hh:mm:ss): </p>
+    <p>(Vergleich Ankunftszeit Punkt A zu Abfahrtszeit Punkt B zwischen beiden Wegen) </p>
+    <p></p>
+    <input id="umstiegszeitStu" type="number" min="0" max="23" step="1" value="0" >
+    :
+    <input id="umstiegszeitMin" type="number" min="0" max="59" step="1" value="30" >
+    :
+    <input id="umstiegszeitSec" type="number" min="0" max="59" step="1" value="0" >
+    <p></p>
+
+    <button onclick="vergleicheWegeGenauer()" type="button">Wege genauer vergleichen</button>
+
+</div>
+
+<div class="box9" id="box9">
+    <p><b>Ergebnisse Vergleich: </b></p>
+
+    <output id="AusgabeErgebnis" ></output>
+
+    <p>Auswahl Vergleiche:</p>
+    <fieldset>
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Koordinaten">
+                    Koordinaten
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Umstiegsweg">
+                    Umstiegsweg
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Startzeit">
+                    Startzeit
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Umstiegsdauer">
+                    Umstiegsdauer
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Wegezweck">
+                    Wegezweck
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="vergleichsfilter" value="Verkehrsmittel">
+                    Verkehrsmittel
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <p> <!-- Absatz -->
+        <button onclick="wendeVergleicheAn()" type="button">Ausgewählte Vergleiche anwenden</button>
+
+
+</div>
+
+<div class="box10" id="box10">
+    <p><b>Ausgabe: </b></p>
+
+    <button onclick="wegedatenHerunterladenFilter()" type="button">Wegedaten herunterladen</button>
+
+    <p><b>Alle Wegepaare </b></p>
+
+    <output id="AusgabeAlle" ></output>
+
+    <output id="AusgabeErgebnisFilter" ></output>
+
+    <p><b>Gewählte Vergleichskriterien </b></p>
+
+    <output id="AusgabeGewaehlteFilter" ></output>
+
+    <p><b>Dargestellte Wege </b></p>
+
+    <output id="AusgabeFilter" ></output>
+</div>
+
+<div class="box11" id="box11">
+    <p><b>Ausgabe: </b></p>
 
     <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
 
@@ -319,6 +510,8 @@
 <script src="Script.js"></script>
 <script src="Vergleich.js"></script>
 
+<!-- Hilfsdatei -->
+<script src="Test_2.js"></script>
 
 </body>
 

@@ -20,12 +20,36 @@ for (var i = 0; i < wegedaten.length; i++) {
 
 }
 
+// Array wegedatenVerkehrsmittel erstellen
+var wegedatenVerkehrsmittel = new Array();
+for (var j = 0; j < wegedatenVerkehrsmittel.length; j++) {
+    wegedatenVerkehrsmittel[j] = new Array(1);
+    wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
+// Array wegedatenKoordinaten erstellen
+var wegedatenKoordinaten = new Array();
+for (var k = 0; k < wegedatenKoordinaten.length; k++) {
+    wegedatenKoordinaten[k] = new Array(1);
+    wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
+// Array wegedatenAbfahrtAnkunft erstellen
+var wegedatenAbfahrtAnkunft = new Array();
+for (var l = 0; l < wegedatenAbfahrtAnkunft.length; l++) {
+    wegedatenAbfahrtAnkunft[l] = new Array(1);
+    wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = "";
+
+}
+
 // Array Anzahl Wege pro User
 var anzahlWegeUser = new Array();
-for (var j = 0; j < anzahlWegeUser.length; j++) {
-    anzahlWegeUser[j] = new Array(2);
-    anzahlWegeUser[j]["UserID"] = "";
-    anzahlWegeUser[j]["Anzahl Wege"] = 0;
+for (var m = 0; m < anzahlWegeUser.length; m++) {
+    anzahlWegeUser[m] = new Array(2);
+    anzahlWegeUser[m]["UserID"] = "";
+    anzahlWegeUser[m]["Anzahl Wege"] = 0;
 }
 
 // Arrays zum speichern der WegeIDs, die dieses Verkehrsmittel enthalten
@@ -93,10 +117,103 @@ function readJSONFunction() {
             wegedaten[zaehlerWegedaten]["Dauer"] = content[0]["a2_duration"];
             wegedaten[zaehlerWegedaten]["Distanz"] = content[0]["a3_distance"];
 
-            zaehlerWegedaten = zaehlerWegedaten +1;
-
-            // looping through wayStages
+            // wayStages einlesen
             let wayStage = (content[0]["a5_wayStages"])
+
+
+            //Array wegedatenVerkehrsmittel einlesen
+            wegedatenVerkehrsmittel[zaehlerWegedaten] = new Array();
+            wegedatenVerkehrsmittel[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var j = 0; j < wayStage.length; j++) {
+                wegedatenVerkehrsmittel[zaehlerWegedaten].push(wayStage[j]["a0_mode"]);
+
+            }
+            console.log(wegedatenVerkehrsmittel);
+
+            //Array wegedatenKoordinaten einlesen
+            wegedatenKoordinaten[zaehlerWegedaten] = new Array();
+            wegedatenKoordinaten[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var l = 0; l < wayStage.length; l++) {
+
+                let cor = (wayStage[l]["a3_coordinatesList"]);
+
+                var lat0 = 0;
+                var lng0 = 0;
+                var latanzC = 0;
+                var lnganzC = 0;
+
+                for (var c = 0; c < cor.length; c++){
+
+                    //erste Koordinaten eines WayStages speichern
+                    if(c == 0){
+                        lat0 = cor[c]["coordinate_lat"];
+                        lng0 = cor[c]["coordinate_lng"];
+
+                    }
+
+                    //letzte Koordinaten eines WayStages speichern
+                    if(c == cor.length-1){
+                        latanzC = cor[c]["coordinate_lat"];
+                        lnganzC = cor[c]["coordinate_lng"];
+
+                    }
+
+                }
+
+                //console.log("lat[0]: " + lat0);
+                //console.log("lng[0]: " + lng0);
+
+                //console.log("lat[anzC]: " + latanzC);
+                //console.log("lng[anzC]: " + lnganzC);
+
+                wegedatenKoordinaten[zaehlerWegedaten].push(lat0);
+                wegedatenKoordinaten[zaehlerWegedaten].push(lng0);
+                wegedatenKoordinaten[zaehlerWegedaten].push(latanzC);
+                wegedatenKoordinaten[zaehlerWegedaten].push(lnganzC);
+
+            }
+            console.log(wegedatenKoordinaten);
+
+            //Array Abfahrts- und Ankunftszeiten einlesen
+            wegedatenAbfahrtAnkunft[zaehlerWegedaten] = new Array();
+            wegedatenAbfahrtAnkunft[zaehlerWegedaten]["WegeID"] = content[0]["a0_wayUUID"];
+            for (var k = 0; k < wayStage.length; k++) {
+
+                let cor = (wayStage[k]["a3_coordinatesList"]);
+
+                var abfahrt = 0;
+                var ankunft = 0;
+
+                for (var d = 0; d < cor.length; d++){
+
+                    //erste Koordinaten eines WayStages speichern
+                    if(d == 0){
+                        abfahrt = new Date(cor[d]["coordinate_timestamp"]);
+                    }
+
+                    //letzte Koordinaten eines WayStages speichern
+                    if(d == cor.length-1){
+                        ankunft = new Date(cor[d]["coordinate_timestamp"]);
+                    }
+
+                }
+
+                //console.log("abfahrt");
+                //console.log(abfahrt);
+
+                //console.log("ankunft");
+                //console.log(ankunft);
+
+                wegedatenAbfahrtAnkunft[zaehlerWegedaten].push(abfahrt);
+                wegedatenAbfahrtAnkunft[zaehlerWegedaten].push(ankunft);
+
+            }
+            console.log(wegedatenAbfahrtAnkunft);
+
+
+            //zaehlerWegedaten erhöhen
+            zaehlerWegedaten = zaehlerWegedaten + 1;
+
 
             // Hilfsvariablen, damit WegeId bei den Verkehrsmitteln nur einmal gespeichert wird
             var hilfFuss = false;
@@ -305,7 +422,7 @@ function aktualisiereNutzer() {
     // sortiere Array anzahlWegeUser nach Anzahl der Wege absteigend in Hilfsarray sortAnzahlWegeUser
 
     var sortAnzahlWegeUser = new Array();
-    anzahlWegeUser.forEach(function(element,index) {
+    anzahlWegeUser.forEach(function(element) {
         sortAnzahlWegeUser.push({name: element["UserID"],val: element["Anzahl Wege"]});
     });
     sortAnzahlWegeUser.sort(function(a,b){
@@ -318,7 +435,7 @@ function aktualisiereNutzer() {
     anzahlWegeUser.splice(0,anzahlWegeUser.length);
 
     // befülle Ursprungsarray mit sortierten Werten
-    sortAnzahlWegeUser.forEach(function(element, index){
+    sortAnzahlWegeUser.forEach(function(element){
         anzahlWegeUser.push({["UserID"]: element.name,["Anzahl Wege"]: element.val});
     });
 
@@ -328,7 +445,7 @@ function aktualisiereNutzer() {
     userID.splice(0,userID.length);
 
     // befülle Array mit sortierten Werten, damit Reihenfolge UserID-Anzahl Wege gleich der Auswahl der UserId ist
-    sortAnzahlWegeUser.forEach(function(element, index){
+    sortAnzahlWegeUser.forEach(function(element){
         userID.push(element.name);
     });
 
@@ -337,7 +454,7 @@ function aktualisiereNutzer() {
     // Füge jeden im Array userId gespeicherten Nutzer der Übersicht WegeID-Anzahl Wege hinzu
     var selA = document.getElementById("Anzahl Wege pro Nutzer");
 
-    anzahlWegeUser.forEach(function(element, index) {
+    anzahlWegeUser.forEach(function(element) {
         var user = element["UserID"];
         var anzahl = element["Anzahl Wege"];
 
@@ -352,7 +469,7 @@ function aktualisiereNutzer() {
 
     // Füge jeden im Array userId gespeicherten Nutzer der Auswahl der userID hinzu
 
-    userID.forEach(function(element, index) {
+    userID.forEach(function(element) {
         var opt = document.createElement('option');
         opt.innerHTML = element;
         opt.value = element;
@@ -381,7 +498,7 @@ function auswahlFilter() {
             case "Wege vergleichen":
                 if(checkboxesFilter[i].checked){
                     // Anzeige der Auswahl der Nutzertypen
-                    vergleicheWege();}
+                    auswahlVglKriterien();}
                 break;
             default:
                 break;
@@ -428,7 +545,7 @@ function auswahlNutzertyp() {
                 break;
             case "Pendler (nur ÖPNV)":
                 if(checkboxesNutzer[i].checked){
-                    zeichneAllePendlerwegeÖPNV();}
+                    zeichneAllePendlerwegeOEPNV();}
                 break;
             case "eigene Auswahl":
                 if(checkboxesNutzer[i].checked){
@@ -503,7 +620,7 @@ function zeichneAllePendlerwege() {
 
 } // Ende zeichneAllePendlerwege()
 
-function zeichneAllePendlerwegeÖPNV() {
+function zeichneAllePendlerwegeOEPNV() {
     // Abfrage der gewählten NutzerID
     var user = abfrageNutzer();
     console.log(user);
@@ -531,7 +648,7 @@ function zeichneAllePendlerwegeÖPNV() {
     // Wege, die den Filtern entsprechen zeichnen
     zeichneWeg(wegeID, verkehrsmittel);
 
-} // Ende zeichneAllePendlerwegeÖPNV()
+} // Ende zeichneAllePendlerwegeOEPNV()
 
 function wendeFilterAn() {
     console.log("Wende Filter an!")
@@ -1128,12 +1245,10 @@ function pruefeWegedaten(user, wegezweck, startzeit, verkehrsmittel, wegeID){
 function zeichneWeg(wegeID, verkehrsmittel){
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
-    document.getElementById("box6").style.display = "block";
+    document.getElementById("box11").style.display = "block";
 
     // load selected JSON Files
     let filesAuswahl = document.getElementById("jsonFiles").files;
-
-    var ausgabe_data = new Array();
 
     // read selected JSON Files
     for(file of filesAuswahl) {
@@ -1154,8 +1269,8 @@ function zeichneWeg(wegeID, verkehrsmittel){
                     let wayStage = (content[0]["a5_wayStages"])
                     //console.log(wayStage)
 
-                    let vmA = "";
                     var alleWayStages = "";
+                    var f = 0;
 
                     // looping though coordinatesList
                     for (var i = 0; i < wayStage.length; i++) {
@@ -1168,20 +1283,40 @@ function zeichneWeg(wegeID, verkehrsmittel){
                         var lng ;
 
 
+                        var zaehler = "";
+
+                        for(var c = 0; c < wegedatenKoordinaten.length; c++){
+                            if(aktuelleWegeId == wegedatenKoordinaten[c]["WegeID"]){
+                                zaehler = c;
+                            }
+                        }
+
                         for (var c = 0; c < cor.length; c++){
-                            anzC = anzC + 1;
                             lat = cor[c]["coordinate_lat"];
                             lng = cor[c]["coordinate_lng"];
                             coordinates_lat.push(lat);
                             coordinates_lng.push(lng);
+                            anzC = anzC + 1;
                         }
                         console.log(anzC);
-                        var anzC1 = anzC - 1;
+
+                        /*var anzC1 = anzC - 1;
                         var aLatN = coordinates_lat[0];
                         var aLngN = coordinates_lng[0];
 
                         var aLatL = coordinates_lat[anzC1];
                         var aLngL = coordinates_lng[anzC1];
+
+                         */
+
+                        var aLatN = wegedatenKoordinaten[zaehler][f];
+                        var aLngN = wegedatenKoordinaten[zaehler][f+1];
+
+                        var aLatL = wegedatenKoordinaten[zaehler][f+2];
+                        var aLngL = wegedatenKoordinaten[zaehler][f+3];
+
+                        f = f + 4;
+
 
                         console.log("lat[0]: " + aLatN);
                         console.log("lng[0]: " + aLngN);
@@ -1273,6 +1408,8 @@ function wegedatenHerunterladen() {
 
     var a = 0;
     wegeAnz = Array.from(document.getElementById("Ausgabe").children);
+    console.log("wegeAnz");
+    console.log(wegeAnz);
     wegeAnz.forEach(wegAnzeige=>{
         Array.from(wegAnzeige.children).forEach(element=>{
 
@@ -1289,6 +1426,160 @@ function wegedatenHerunterladen() {
                         ausgabe_data.push(t);
                         a = a+1;
                 }})
+
+            }
+
+        })
+
+    })
+
+    console.log(ausgabe_data);
+
+    var ausg;
+
+    for (var g = 0; g < ausgabe_data.length; g++){
+        var zeile = ausgabe_data[g].toString();
+        zeile = zeile.replace("ß","ss");
+        console.log(zeile);
+        ausg = zeile + '\n';
+        ausgabe_data.splice(g,1,ausg);
+        console.log(ausgabe_data[g]);
+    }
+
+    console.log(ausgabe_data);
+
+    var send= ausgabe_data.join("");
+
+    console.log(send);
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + send;
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "wegedaten.csv");
+    document.body.appendChild(link);
+    link.click();
+
+}
+
+function wegedatenHerunterladenGrob() {
+
+    var a = 0;
+
+    var wegeAnz = [];
+    wegeAnz1 = Array.from(document.getElementById("AusgabeMittelwerte").children);
+    wegeAnz2 = Array.from(document.getElementById("AusgabeAlleGrob").children);
+    wegeAnz3 = Array.from(document.getElementById("AusgabeGrob").children);
+
+    wegeAnz1.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz2.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz3.forEach(function(element){
+        wegeAnz.push(element);
+    });
+
+    console.log("wegeAnz");
+    console.log(wegeAnz);
+    wegeAnz.forEach(wegAnzeige=>{
+        Array.from(wegAnzeige.children).forEach(element=>{
+
+            if (element.className == 'content') {
+                console.log(element);
+                var t= document.getElementsByClassName('content')[a].innerHTML;
+                ausgabe_data.push(t);
+                a = a+1;
+            } else if(element.className == 'test') {
+                Array.from(element.children).forEach(e2=>{
+                    if (e2.className == 'content') {
+                        console.log(e2);
+                        var t= document.getElementsByClassName('content')[a].innerHTML;
+                        ausgabe_data.push(t);
+                        a = a+1;
+                    }})
+
+            }
+
+        })
+
+    })
+
+    console.log(ausgabe_data);
+
+    var ausg;
+
+    for (var g = 0; g < ausgabe_data.length; g++){
+        var zeile = ausgabe_data[g].toString();
+        zeile = zeile.replace("ß","ss");
+        console.log(zeile);
+        ausg = zeile + '\n';
+        ausgabe_data.splice(g,1,ausg);
+        console.log(ausgabe_data[g]);
+    }
+
+    console.log(ausgabe_data);
+
+    var send= ausgabe_data.join("");
+
+    console.log(send);
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + send;
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "wegedaten.csv");
+    document.body.appendChild(link);
+    link.click();
+
+}
+
+function wegedatenHerunterladenFilter() {
+    //TODO ausgabe aller Elemente wegedatenHerunterladenFilter()
+    var a = 0;
+    var wegeAnz = [];
+    wegeAnz1 = Array.from(document.getElementById("AusgabeAlle").children);
+    wegeAnz2 = Array.from(document.getElementById("AusgabeErgebnisFilter").children);
+    wegeAnz3 = Array.from(document.getElementById("AusgabeGewaehlteFilter").children);
+    wegeAnz4 = Array.from(document.getElementById("AusgabeFilter").children);
+
+    wegeAnz1.forEach(function(element){
+       wegeAnz.push(element);
+    });
+    wegeAnz2.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz3.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz4.forEach(function(element){
+        wegeAnz.push(element);
+    });
+
+    console.log("wegeAnz");
+    console.log(wegeAnz);
+
+    wegeAnz.forEach(wegAnzeige=>{
+        Array.from(wegAnzeige.children).forEach(element=>{
+
+            if (element.className == 'content') {
+                console.log(element);
+                var t= document.getElementsByClassName('content')[a].innerHTML;
+                ausgabe_data.push(t);
+                a = a+1;
+            } else if(element.className == 'test') {
+                Array.from(element.children).forEach(e2=>{
+                    if (e2.className == 'content') {
+                        console.log(e2);
+                        var t= document.getElementsByClassName('content')[a].innerHTML;
+                        ausgabe_data.push(t);
+                        a = a+1;
+                    }})
 
             }
 
