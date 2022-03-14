@@ -2411,7 +2411,7 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 
     //Ausgabe aller Wegepaare
     var anzahlAlle = wegeIDVglWegepaareAnfang.length;
-    var ausgabeAnzahlAlle = "<b class='content'>Anzahl Wegepaare: </b>" + "<span class='content'>"+ anzahlAlle +"</span>" +"<p></p>";
+    var ausgabeAnzahlAlle = "<b class='content'>Anzahl alle Wegepaare: </b>" + "<span class='content'>"+ anzahlAlle +"</span>" +"<p></p>";
     var sel = document.getElementById("AusgabeAlleGrob");
     var anzahl = document.createElement('AnzahlAlleGrob');
     anzahl.innerHTML = ausgabeAnzahlAlle;
@@ -2442,7 +2442,7 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
     //Ausgabe aller Wegepaare, die Vergleichskriterien entsprechen udn Darstellung auf der Karte
 
     var anzahlVgl = wegeIDVglWegepaare.length;
-    var ausgabeAnzahlVgl = "<b class='content'>Anzahl Wegepaare: </b>" + "<span class='content'>"+ anzahlVgl +"</span>" +"<p></p>";
+    var ausgabeAnzahlVgl = "<b class='content'>Anzahl dargestellte Wegepaare: </b>" + "<span class='content'>"+ anzahlVgl +"</span>" +"<p></p>";
     var sel1 = document.getElementById("AusgabeGrob");
     var anzahlVgl = document.createElement('AnzahlGrob');
     anzahlVgl.innerHTML = ausgabeAnzahlVgl;
@@ -2677,7 +2677,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
 
     //Ausgabe aller Wegepaare
     var anzahlAlle = wegeIDVglWegepaareAnfang.length;
-    var ausgabeAnzahlAlle = "<b class='content'>Anzahl Wegepaare: </b>" + "<span class='content'>"+ anzahlAlle +"</span>" +"<p></p>";
+    var ausgabeAnzahlAlle = "<b class='content'>Anzahl alle Wegepaare: </b>" + "<span class='content'>"+ anzahlAlle +"</span>" +"<p></p>";
     var sel = document.getElementById("AusgabeAlle");
     var anzahl = document.createElement('AnzahlAlle');
     anzahl.innerHTML = ausgabeAnzahlAlle;
@@ -2733,8 +2733,8 @@ function zeichneWegVgl(wegeIDVglWegepaare){
     //Ausgabe aller Wegepaare, die Vergleichskriterien entsprechen und Darstellung der Wege auf der Karte
 
     var anzahlVgl = wegeIDVglWegepaare.length;
-    var ausgabeAnzahlVgl = "<b class='content'>Anzahl Wegepaare: </b>" + "<span class='content'>"+ anzahlVgl +"</span>" +"<p></p>";
-    var sel1 = document.getElementById("Ausgabe");
+    var ausgabeAnzahlVgl = "<b class='content'>Anzahl dargestellte Wegepaare: </b>" + "<span class='content'>"+ anzahlVgl +"</span>" +"<p></p>";
+    var sel1 = document.getElementById("AusgabeFilter");
     var anzahlVgl = document.createElement('AnzahlVgl');
     anzahlVgl.innerHTML = ausgabeAnzahlVgl;
     anzahlVgl.value = ausgabeAnzahlVgl;
@@ -2785,7 +2785,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
             "<br class='content'>WegeID 1: </br>" + "<span class='content'>" + wegeID1 +"</span>" +
             "<br class='content'>WegeID 2: </br>" + "<span class='content'>" + wegeID2 +"</span>" +
             "<br class='content'>UserID: </br>" + "<span class='content'>" + userIDvgl +"</span>" +"<p></p>";
-        var sel = document.getElementById("Ausgabe");
+        var sel = document.getElementById("AusgabeFilter");
         var wegepaar = document.createElement('Wegepaar');
         wegepaar.innerHTML = wegepaarNeu;
         wegepaar.value = wegepaarNeu;
@@ -2924,7 +2924,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
                         "<br><b class='content'>Dauer: </b>" + "<span class='content'>"+content[0]["a2_duration"] +"</span>" +
                         "<br><b class='content'>Distanz: </b>" + "<span class='content'>"+ content[0]["a3_distance"] +
                         "</span>" + "<br><b class='content'>WayStages: </b>" + alleWayStages + "<p></p>";
-                    var sel = document.getElementById("Ausgabe");
+                    var sel = document.getElementById("AusgabeFilter");
                     var weg = document.createElement('Weg');
                     weg.innerHTML = wegeInfo;
                     weg.value = wegeInfo;

@@ -79,6 +79,13 @@
             width: 50%;
             box-sizing: border-box;
         }
+        .box11 {
+            display: none;
+            float: down;
+            padding: 10px;
+            width: 50%;
+            box-sizing: border-box;
+        }
         #map {
             position: fixed;
             top: 0;
@@ -365,7 +372,7 @@
 <div class="box7" id="box7">
     <p><b>Ausgabe Grobvergleich: </b></p>
 
-    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
+    <button onclick="wegedatenHerunterladenGrob()" type="button">Wegedaten herunterladen</button>
 
     <p><b>Mittelwerte </b></p>
 
@@ -470,7 +477,7 @@
 <div class="box10" id="box10">
     <p><b>Ausgabe: </b></p>
 
-    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
+    <button onclick="wegedatenHerunterladenFilter()" type="button">Wegedaten herunterladen</button>
 
     <p><b>Alle Wegepaare </b></p>
 
@@ -481,6 +488,16 @@
     <p><b>Gewählte Vergleichskriterien </b></p>
 
     <output id="AusgabeGewaehlteFilter" ></output>
+
+    <p><b>Dargestellte Wege </b></p>
+
+    <output id="AusgabeFilter" ></output>
+</div>
+
+<div class="box11" id="box11">
+    <p><b>Ausgabe: </b></p>
+
+    <button onclick="wegedatenHerunterladen()" type="button">Wegedaten herunterladen</button>
 
     <p><b>Dargestellte Wege </b></p>
 

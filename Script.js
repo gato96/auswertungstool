@@ -1245,8 +1245,7 @@ function pruefeWegedaten(user, wegezweck, startzeit, verkehrsmittel, wegeID){
 function zeichneWeg(wegeID, verkehrsmittel){
 
     // Rufe Ausgabe auf, in der alle dargestellten Wege aufgeführt werden
-    //TODO Optik neue Ausgabebox für Variante ohne Vergleiche Wege?
-    document.getElementById("box10").style.display = "block";
+    document.getElementById("box11").style.display = "block";
 
     // load selected JSON Files
     let filesAuswahl = document.getElementById("jsonFiles").files;
@@ -1407,11 +1406,10 @@ function zeichneWeg(wegeID, verkehrsmittel){
 
 function wegedatenHerunterladen() {
 
-    //TODO Funktionalität herunterladen der gesamten Ausgabe,
-    // entweder alle Ausgaben gleich mit unterschiedlichem Child oder
-    // alle Ausgaben im Array speichern
     var a = 0;
     wegeAnz = Array.from(document.getElementById("Ausgabe").children);
+    console.log("wegeAnz");
+    console.log(wegeAnz);
     wegeAnz.forEach(wegAnzeige=>{
         Array.from(wegAnzeige.children).forEach(element=>{
 
@@ -1428,6 +1426,160 @@ function wegedatenHerunterladen() {
                         ausgabe_data.push(t);
                         a = a+1;
                 }})
+
+            }
+
+        })
+
+    })
+
+    console.log(ausgabe_data);
+
+    var ausg;
+
+    for (var g = 0; g < ausgabe_data.length; g++){
+        var zeile = ausgabe_data[g].toString();
+        zeile = zeile.replace("ß","ss");
+        console.log(zeile);
+        ausg = zeile + '\n';
+        ausgabe_data.splice(g,1,ausg);
+        console.log(ausgabe_data[g]);
+    }
+
+    console.log(ausgabe_data);
+
+    var send= ausgabe_data.join("");
+
+    console.log(send);
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + send;
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "wegedaten.csv");
+    document.body.appendChild(link);
+    link.click();
+
+}
+
+function wegedatenHerunterladenGrob() {
+
+    var a = 0;
+
+    var wegeAnz = [];
+    wegeAnz1 = Array.from(document.getElementById("AusgabeMittelwerte").children);
+    wegeAnz2 = Array.from(document.getElementById("AusgabeAlleGrob").children);
+    wegeAnz3 = Array.from(document.getElementById("AusgabeGrob").children);
+
+    wegeAnz1.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz2.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz3.forEach(function(element){
+        wegeAnz.push(element);
+    });
+
+    console.log("wegeAnz");
+    console.log(wegeAnz);
+    wegeAnz.forEach(wegAnzeige=>{
+        Array.from(wegAnzeige.children).forEach(element=>{
+
+            if (element.className == 'content') {
+                console.log(element);
+                var t= document.getElementsByClassName('content')[a].innerHTML;
+                ausgabe_data.push(t);
+                a = a+1;
+            } else if(element.className == 'test') {
+                Array.from(element.children).forEach(e2=>{
+                    if (e2.className == 'content') {
+                        console.log(e2);
+                        var t= document.getElementsByClassName('content')[a].innerHTML;
+                        ausgabe_data.push(t);
+                        a = a+1;
+                    }})
+
+            }
+
+        })
+
+    })
+
+    console.log(ausgabe_data);
+
+    var ausg;
+
+    for (var g = 0; g < ausgabe_data.length; g++){
+        var zeile = ausgabe_data[g].toString();
+        zeile = zeile.replace("ß","ss");
+        console.log(zeile);
+        ausg = zeile + '\n';
+        ausgabe_data.splice(g,1,ausg);
+        console.log(ausgabe_data[g]);
+    }
+
+    console.log(ausgabe_data);
+
+    var send= ausgabe_data.join("");
+
+    console.log(send);
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + send;
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "wegedaten.csv");
+    document.body.appendChild(link);
+    link.click();
+
+}
+
+function wegedatenHerunterladenFilter() {
+    //TODO ausgabe aller Elemente wegedatenHerunterladenFilter()
+    var a = 0;
+    var wegeAnz = [];
+    wegeAnz1 = Array.from(document.getElementById("AusgabeAlle").children);
+    wegeAnz2 = Array.from(document.getElementById("AusgabeErgebnisFilter").children);
+    wegeAnz3 = Array.from(document.getElementById("AusgabeGewaehlteFilter").children);
+    wegeAnz4 = Array.from(document.getElementById("AusgabeFilter").children);
+
+    wegeAnz1.forEach(function(element){
+       wegeAnz.push(element);
+    });
+    wegeAnz2.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz3.forEach(function(element){
+        wegeAnz.push(element);
+    });
+    wegeAnz4.forEach(function(element){
+        wegeAnz.push(element);
+    });
+
+    console.log("wegeAnz");
+    console.log(wegeAnz);
+
+    wegeAnz.forEach(wegAnzeige=>{
+        Array.from(wegAnzeige.children).forEach(element=>{
+
+            if (element.className == 'content') {
+                console.log(element);
+                var t= document.getElementsByClassName('content')[a].innerHTML;
+                ausgabe_data.push(t);
+                a = a+1;
+            } else if(element.className == 'test') {
+                Array.from(element.children).forEach(e2=>{
+                    if (e2.className == 'content') {
+                        console.log(e2);
+                        var t= document.getElementsByClassName('content')[a].innerHTML;
+                        ausgabe_data.push(t);
+                        a = a+1;
+                    }})
 
             }
 
