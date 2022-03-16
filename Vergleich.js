@@ -228,7 +228,8 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaareAnfang");
     console.log(wegeIDVglWegepaareAnfang);
 
-    //TODO Funktionalität Anzahl Waystages als Vgl-Kriterium? Als Input mit Mittelwert
+    //TODO aktuell nur Wege mit gleichen WayStages werden als ähnlich betrachtet
+    // Funktionalität Anzahl Waystages als Vgl-Kriterium? Als Input mit Mittelwert
 
     //Beginn Grobvergleiche
     console.log("Grobvergleich");
@@ -415,17 +416,30 @@ function bildeWegepaare() {
 
                     if(userID1 == userID2){
 
-                        console.log("Wegepaar mit gleicher UserID");
-                        wegeIDVglEinfach[zaehler] = new Array();
-                        wegeIDVglEinfach[zaehler]["WegeID 1"] = wegeID1;
-                        wegeIDVglEinfach[zaehler]["WegeID 2"] = wegeID2;
-                        wegeIDVglEinfach[zaehler]["UserID"] = "Wegepaar mit gleicher UserID";
+                        if(userID1 == "" && userID2 == ""){
+                            console.log("UserID nicht vorhanden");
+                            wegeIDVglEinfach[zaehler] = new Array();
+                            wegeIDVglEinfach[zaehler]["WegeID 1"] = wegeID1;
+                            wegeIDVglEinfach[zaehler]["WegeID 2"] = wegeID2;
+                            wegeIDVglEinfach[zaehler]["UserID"] = "UserID nicht vorhanden";
 
-                        zaehler = zaehler + 1;
+                            zaehler = zaehler + 1;
+
+                        } else {
+                            console.log("Wegepaar mit gleicher UserID");
+                            wegeIDVglEinfach[zaehler] = new Array();
+                            wegeIDVglEinfach[zaehler]["WegeID 1"] = wegeID1;
+                            wegeIDVglEinfach[zaehler]["WegeID 2"] = wegeID2;
+                            wegeIDVglEinfach[zaehler]["UserID"] = "Wegepaar mit gleicher UserID";
+
+                            zaehler = zaehler + 1;
+
+                        }
+
+
 
                     } else {
 
-                        //TODO Test element["UserID"] == undefined prüfen, ob if angesprochen wird
                         if(userID1 == undefined){
                             console.log("UserID nicht vorhanden");
                             wegeIDVglEinfach[zaehler] = new Array();
@@ -785,6 +799,36 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
         } else {
             console.log("Verkehrsmittelanzahl stimmt nicht überein");
+
+            //TODO Ausgabe bei nicht übereinstimmender VM-Anzahl?
+            vmListe1 = "Verkehrsmittelanzahl stimmt nicht überein";
+            vmListe2 = "Verkehrsmittelanzahl stimmt nicht überein";
+
+             /*
+            for (var w = 0; w < wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length; w++){
+                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]");
+                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]);
+
+                vmListe1 = vmListe1 + " + " + wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w];
+
+            }
+
+            for (var v = 0; v < wegedatenVerkehrsmittel[zaehlerwegedatenVM2].length; v++){
+
+                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v]");
+                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v]);
+
+                vmListe2 = vmListe2 + " + " + wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v];
+
+            }
+
+            console.log("vmListe1");
+            console.log(vmListe1);
+            console.log("vmListe2");
+            console.log(vmListe2);
+
+              */
+
         }
 
         werteVerkehrsmittelAlle.push({"Verkehrsmittel 1": vmListe1, "Verkehrsmittel 2": vmListe2});
@@ -1066,7 +1110,7 @@ function bildeMittelwertWegezweck(werteWegezweck) {
 }
 
 function bildeMittelwertVerkehrsmittel(werteVerkehrsmittel) {
-    //TODO prüfe leere Liste Verkehrsmittel1 und 2
+
     var rueckgabeVM = new Array();
     for (var n = 0; n < rueckgabeVM.length; n++){
         rueckgabeVM[n] = new Array(2);
@@ -1074,6 +1118,11 @@ function bildeMittelwertVerkehrsmittel(werteVerkehrsmittel) {
         rueckgabeVM[zaehler]["Verkehrsmittel 2"] = "";
         rueckgabeVM[zaehler]["Anzahl"] = 0;
     }
+
+    console.log("werteVerkehrsmittelAlle");
+    console.log(werteVerkehrsmittelAlle);
+    console.log("werteVerkehrsmittel");
+    console.log(werteVerkehrsmittel);
 
     werteVerkehrsmittel.forEach(function(element){
         var verkehrsmittel1 = element["Verkehrsmittel 1"];
@@ -1246,8 +1295,8 @@ function vergleicheStartEndKoordinaten(wegeIDVglWegepaare){
         console.log(wegedatenKoordinaten[weg1Zaehler]);
         console.log("wegedatenKoordinaten[weg1Zaehler].length");
         console.log(wegedatenKoordinaten[weg1Zaehler].length);
-        console.log(wegedatenKoordinaten[weg2Zaehler]);
         console.log("wegedatenKoordinaten[weg2Zaehler]");
+        console.log(wegedatenKoordinaten[weg2Zaehler]);
         console.log("wegedatenKoordinaten[weg2Zaehler].length");
         console.log(wegedatenKoordinaten[weg2Zaehler].length);
 
@@ -1259,7 +1308,7 @@ function vergleicheStartEndKoordinaten(wegeIDVglWegepaare){
         if(wegedatenKoordinaten[weg1Zaehler].length == wegedatenKoordinaten[weg2Zaehler].length){
 
             var k = 0;
-            var l = wegedatenKoordinaten.length-2;
+            var l = wegedatenKoordinaten[weg1Zaehler].length-2;
 
             console.log(k);
             console.log(l);

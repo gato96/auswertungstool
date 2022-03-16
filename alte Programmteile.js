@@ -27,7 +27,7 @@ function bildeWegepaarealt() {
 
             } else {
 
-                //TODO Test element["UserID"] == undefined prüfen, ob if angesprochen wird
+
                 if(element["UserID"] == undefined){
                     console.log("UserID nicht vorhanden");
                     wegeIDVgl[zaehler] = new Array();
