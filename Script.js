@@ -1543,10 +1543,10 @@ function wegedatenHerunterladenFilter() {
     //TODO ausgabe aller Elemente wegedatenHerunterladenFilter()
     var a = 0;
     var wegeAnz = [];
-    wegeAnz1 = Array.from(document.getElementById("AusgabeAlle").children);
-    wegeAnz2 = Array.from(document.getElementById("AusgabeErgebnisFilter").children);
-    wegeAnz3 = Array.from(document.getElementById("AusgabeGewaehlteFilter").children);
-    wegeAnz4 = Array.from(document.getElementById("AusgabeFilter").children);
+    var wegeAnz1 = Array.from(document.getElementById("AusgabeAlle").children);
+    var wegeAnz2 = Array.from(document.getElementById("AusgabeErgebnisFilter").children);
+    var wegeAnz3 = Array.from(document.getElementById("AusgabeGewaehlteFilter").children);
+    var wegeAnz4 = Array.from(document.getElementById("AusgabeFilter").children);
 
     wegeAnz1.forEach(function(element){
        wegeAnz.push(element);
@@ -1560,6 +1560,10 @@ function wegedatenHerunterladenFilter() {
     wegeAnz4.forEach(function(element){
         wegeAnz.push(element);
     });
+
+
+
+    //wegeAnz = document.getElementById("box10").innerHTML;
 
     console.log("wegeAnz");
     console.log(wegeAnz);
