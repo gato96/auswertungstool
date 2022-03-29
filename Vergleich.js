@@ -31,8 +31,6 @@ for (var c = 0; c < wegeIDVglDauerUmstieg.length; c++) {
     wegeIDVglDauerUmstieg[zaehler]["UserID"] = "";
 }
 
-wegeIDVglNutzerID
-
 var wegeIDVglNutzerID = new Array();
 for (var p = 0; p < wegeIDVglNutzerID.length; p++) {
     wegeIDVglNutzerID[p] = new Array(3);
@@ -230,9 +228,6 @@ function vergleicheWege() {
     console.log("wegeIDVglWegepaareAnfang");
     console.log(wegeIDVglWegepaareAnfang);
 
-    //TODO aktuell nur Wege mit gleichen WayStages werden als ähnlich betrachtet
-    // Funktionalität Anzahl Waystages als Vgl-Kriterium? Als Input mit Mittelwert
-
     //Rufe Vergleichsrichtung "gleiche Richtung"/"Hin- und Rückweg" ab
     var checkboxesAuswahlVgl = document.getElementsByName("auswahlVergleich");
 
@@ -286,6 +281,41 @@ function vergleicheWege() {
     document.getElementById("box8").style.display = "block";
 
 } //Ende vergleicheWege()
+
+function vergleicheGrob(wegeIDVglWegepaare){
+
+    //Vergleich Grob
+
+    //Vergleich NutzerID
+    console.log("Vergleich NutzerID");
+    wegeIDVglWegepaare = vergleicheNutzerID(wegeIDVglWegepaare);
+    console.log("Ende Vergleich NutzerID");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    //Vergleich Start- und Endkoordinate
+    console.log("Vergleich Start- und Endkoordinaten");
+    wegeIDVglWegepaare = vergleicheStartEndKoordinaten(wegeIDVglWegepaare);
+    console.log("Ende Vergleich Start- und Endkoordinaten");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    //Vergleich Gesamtdistanz
+    console.log("Vergleich Gesamtdistanz");
+    wegeIDVglWegepaare = vergleicheGesamtdistanz(wegeIDVglWegepaare);
+    console.log("Ende Vergleich Gesamtdistanz");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    //Vergleich Gesamtdauer
+    console.log("Vergleich Gesamtdauer");
+    wegeIDVglWegepaare = vergleicheGesamtdauer(wegeIDVglWegepaare);
+    console.log("Ende Vergleich Gesamtdauer");
+    console.log("wegeIDVglWegepaare");
+    console.log(wegeIDVglWegepaare);
+
+    return wegeIDVglWegepaare;
+}
 
 function vergleicheWegeGenauer(){
 
@@ -360,43 +390,8 @@ function wendeVergleicheAn() {
     console.log("wegeIDVglWegepaareFilter");
     console.log(wegeIDVglWegepaareFilter);
 
-    zeichneWegVgl(wegeIDVglWegepaareFilter);
+    ausgabeWegVgl(wegeIDVglWegepaareFilter);
 
-}
-
-function vergleicheGrob(wegeIDVglWegepaare){
-
-    //Vergleich Grob
-
-    //Vergleich NutzerID
-    console.log("Vergleich NutzerID");
-    wegeIDVglWegepaare = vergleicheNutzerID(wegeIDVglWegepaare);
-    console.log("Ende Vergleich NutzerID");
-    console.log("wegeIDVglWegepaare");
-    console.log(wegeIDVglWegepaare);
-
-    //Vergleich Start- und Endkoordinate
-    console.log("Vergleich Start- und Endkoordinaten");
-    wegeIDVglWegepaare = vergleicheStartEndKoordinaten(wegeIDVglWegepaare);
-    console.log("Ende Vergleich Start- und Endkoordinaten");
-    console.log("wegeIDVglWegepaare");
-    console.log(wegeIDVglWegepaare);
-
-    //Vergleich Gesamtdistanz
-    console.log("Vergleich Gesamtdistanz");
-    wegeIDVglWegepaare = vergleicheGesamtdistanz(wegeIDVglWegepaare);
-    console.log("Ende Vergleich Gesamtdistanz");
-    console.log("wegeIDVglWegepaare");
-    console.log(wegeIDVglWegepaare);
-
-    //Vergleich Gesamtdauer
-    console.log("Vergleich Gesamtdauer");
-    wegeIDVglWegepaare = vergleicheGesamtdauer(wegeIDVglWegepaare);
-    console.log("Ende Vergleich Gesamtdauer");
-    console.log("wegeIDVglWegepaare");
-    console.log(wegeIDVglWegepaare);
-
-    return wegeIDVglWegepaare;
 }
 
 //Ende Funktionen Ablauf Programm
@@ -631,7 +626,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
                 if(vergleichsRichtung == "gleiche Richtung"){
 
-                    for( var l = 1; l < wegedatenKoordinaten[weg1Zaehler].length-2; l = l + 4){
+                    for( var l = 2; l < wegedatenKoordinaten[weg1Zaehler].length-2; l = l + 4){
                         console.log(l);
                         console.log("wegedatenKoordinaten[weg1Zaehler][l]");
                         console.log(wegedatenKoordinaten[weg1Zaehler][l]);
@@ -720,7 +715,7 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
                             console.log("distanz");
                             console.log(distanz);
                             werteKoordinatenUmstiegAlle.push(distanz);
-                            m = m - 2;
+                            m = m - 4;
 
                         }
 
@@ -3278,9 +3273,9 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 
 } // Ende ()
 
-function zeichneWegVgl(wegeIDVglWegepaare){
+function ausgabeWegVgl(wegeIDVglWegepaare){
 
-    console.log("zeichneWegVgl");
+    console.log("ausgabeWegVgl");
 
     // alle Wege von der Karte löschen
     polylines.forEach(function (item) {
@@ -3557,7 +3552,7 @@ function zeichneWegVgl(wegeIDVglWegepaare){
         readerAuswahl.readAsText(file);
     }
 
-} // Ende zeichneWegVgl()
+} // Ende ausgabeWegVgl()
 //Ende Ausgabe und Zeichnen Funktion
 
 //X sonstige Funktionen
