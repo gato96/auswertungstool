@@ -204,6 +204,8 @@ var polylines = [];
 
 var vergleichsRichtung = "";
 
+var anzahlAlleGrobGefiltertenWegepaare = "";
+
 //Ende Definition Arrays
 
 //X Beginn Funktionen
@@ -3320,7 +3322,7 @@ function ausgabeWegVgl(wegeIDVglWegepaare){
 
     });
 
-    var ergebnisseFilter = "<b class='content'>Anzahl aller grob gefilterten Wegepaare: </b>" + "<span class='content'>" + wegeIDVglWegepaare.length + "</span>" +
+    var ergebnisseFilter = "<b class='content'>Anzahl aller grob gefilterten Wegepaare: </b>" + "<span class='content'>" + anzahlAlleGrobGefiltertenWegepaare + "</span>" +
         "<br class='content'><b>Anzahl Wege, die Vergleichskriterium entsprechen: </b>" +
         "<br class='content'> Koordinaten: " + "<span class='content'>" + wegeIDVglKoordinaten.length + "</span>" +
         "<br class='content'> Umstiegsweg: " + "<span class='content'>" + wegeIDVglKoordinatenUmstieg.length + "</span>" +
@@ -3641,7 +3643,8 @@ function waehleWege(wegeIDVglWegepaare, wegeIDVglKoordinaten, wegeIDVglKoordinat
     console.log("wegeIDVglVerkehrsmittel.length");
     console.log(wegeIDVglVerkehrsmittel.length);
 
-    var ergebnisseFilter = "<b class='content'>Anzahl aller grob gefilterten Wegepaare: </b>" + "<span class='content'>"+ wegeIDVglWegepaare.length + "</span>" +
+    anzahlAlleGrobGefiltertenWegepaare = wegeIDVglWegepaare.length;
+    var ergebnisseFilter = "<b class='content'>Anzahl aller grob gefilterten Wegepaare: </b>" + "<span class='content'>"+ anzahlAlleGrobGefiltertenWegepaare + "</span>" +
         "<br><b class='content'>Anzahl Wege, die Vergleichskriterium entsprechen: </b>" +
         "<br><b class='content'>Koordinaten: </b>" + "<span class='content'>"+ wegeIDVglKoordinaten.length + "</span>" +
         "<br><b class='content'>Umstiegsweg: </b>" + "<span class='content'>"+ wegeIDVglKoordinatenUmstieg.length + "</span>" +
