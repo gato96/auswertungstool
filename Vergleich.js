@@ -3584,6 +3584,27 @@ function vergleichsFunktionZeit(ankunft, abfahrt) {
 
     console.log(ankunft);
     console.log(abfahrt);
+    if(ankunft == 0 && abfahrt != 0){
+        var year = abfahrt.getUTCFullYear();
+        var month = abfahrt.getUTCMonth();
+        var day = abfahrt.getUTCDate();
+        ankunft = new Date(year, month, day, 0, 0, 0);
+        console.log(ankunft);
+    } else {
+        if(ankunft != 0 && abfahrt == 0){
+            var year = ankunft.getUTCFullYear();
+            var month = ankunft.getUTCMonth();
+            var day = ankunft.getUTCDate();
+            abfahrt = new Date(year, month, day, 0, 0, 0);
+            console.log(abfahrt);
+        } else {
+            ankunft = new Date(0, 0, 0, 0, 0, 0);
+            abfahrt = new Date(0, 0, 0, 0, 0, 0);
+
+        }
+
+    }
+
     var umstiegszeitMS = (abfahrt.getTime() - ankunft.getTime());
     console.log("umstiegszeitMS")
     console.log(umstiegszeitMS);
