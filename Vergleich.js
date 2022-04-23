@@ -402,7 +402,6 @@ function wendeVergleicheAn() {
 function bildeWegepaare() {
 
     //speichere nur ein Wegepaar mit den gleichen beiden Wegen
-
     var zaehler = 0;
     wegeIDVglEinfach[zaehler] = new Array();
     wegeIDVglEinfach[zaehler]["WegeID 1"] = "";
@@ -456,8 +455,6 @@ function bildeWegepaare() {
                             zaehler = zaehler + 1;
 
                         }
-
-
 
                     } else {
 
@@ -1248,7 +1245,6 @@ function bildeMittelwertDate(array) {
         else return parseInt(wert);
     }
 
-    //TODO Funktionalität? Division Zeit Mittelwert Rundung?
     var stuR = fuehrendeNullSec((rueckgabeS/60/60)%24);
     var minR = fuehrendeNullSec((rueckgabeS/60)%60);
     var secR = fuehrendeNullSec(rueckgabeS%60);
@@ -1719,7 +1715,6 @@ function vergleicheGesamtdistanz(wegeIDVglWegepaare){
 
             console.log(distanzweg1ZaehlerM);
 
-            //TODO Funktionalität? Distanz von string in int umwandeln?
             //km = km.parseInt(distanzweg1ZaehlerKM);
             //m = m.parseInt(distanzweg1ZaehlerM);
             //distanzweg1Zaehler = (km*1000) + (m*100);
@@ -1750,7 +1745,6 @@ function vergleicheGesamtdistanz(wegeIDVglWegepaare){
 
             console.log(distanzweg2ZaehlerM);
 
-            //TODO Funktionalität? Distanz von string in int umwandeln?
             //km = km.parseInt(distanzweg2ZaehlerKM);
             //m = m.parseInt(distanzweg2ZaehlerM);
             //distanzweg2Zaehler = (km*1000) + (m*100);
