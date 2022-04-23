@@ -198,7 +198,6 @@ var wegeIDVglAusgabe = new Array();
 var gewaehlteFilter = new Array();
 
 // arrayList of PolyLine Coordinates
-var listGeoJson = [{"type":"FeatureCollection", "features": []}];
 var polyline;
 var polylines = [];
 
@@ -1003,31 +1002,6 @@ function bildeMittelwerte(wegeIDVglWegepaareAnfang) {
 
             vmListe1 = "Verkehrsmittelanzahl stimmt nicht überein";
             vmListe2 = "Verkehrsmittelanzahl stimmt nicht überein";
-
-             /*
-            for (var w = 0; w < wegedatenVerkehrsmittel[zaehlerwegedatenVM1].length; w++){
-                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]");
-                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w]);
-
-                vmListe1 = vmListe1 + " + " + wegedatenVerkehrsmittel[zaehlerwegedatenVM1][w];
-
-            }
-
-            for (var v = 0; v < wegedatenVerkehrsmittel[zaehlerwegedatenVM2].length; v++){
-
-                console.log("wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v]");
-                console.log(wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v]);
-
-                vmListe2 = vmListe2 + " + " + wegedatenVerkehrsmittel[zaehlerwegedatenVM2][v];
-
-            }
-
-            console.log("vmListe1");
-            console.log(vmListe1);
-            console.log("vmListe2");
-            console.log(vmListe2);
-
-              */
 
         }
 
@@ -2470,43 +2444,6 @@ function vergleicheStartzeit(wegeIDVglWegepaare){
 
         }
 
-        /*//Zeitraum "von" mit Stunden, Minuten, Sekunden von Weg1 und Datum von Weg2 anlegen
-        var startzeitVonStunden = parseInt(stunden1, 10) - startzeitraumStu;
-        var startzeitVonMinuten = parseInt(minuten1, 10) - startzeitraumMin;
-        var startzeitVonSekunden = parseInt(sekunden1, 10) - startzeitraumSec;
-        //console.log(tag1);
-        //console.log(stunden1, "-", startzeitraumStu);
-        //console.log(minuten1, "-", startzeitraumMin);
-        //console.log(sekunden1, "-", startzeitraumSec);
-        //console.log(startzeitVonStunden, " ", startzeitVonMinuten, " ", startzeitVonSekunden);
-        var startzeitVon = new Date(jahr2, monat2, tag2, startzeitVonStunden, startzeitVonMinuten, startzeitVonSekunden);
-        console.log("startzeitVon");
-        console.log(startzeitVon);
-
-        //Zeitraum "bis" mit Stunden, Minuten, Sekunden von Weg1 und Datum von Weg2 anlegen
-        var startzeitBisStunden = parseInt(stunden1, 10) + startzeitraumStu;
-        var startzeitBisMinuten = parseInt(minuten1, 10) + startzeitraumMin;
-        var startzeitBisSekunden = parseInt(sekunden1, 10) + startzeitraumSec;
-        //console.log(tag1);
-        //console.log(stunden1, "+", startzeitraumStu);
-        //console.log(minuten1, "+", startzeitraumMin);
-        //console.log(sekunden1, "+", startzeitraumSec);
-        //console.log(startzeitBisStunden, " ", startzeitBisMinuten, " ", startzeitBisSekunden);
-        var startzeitBis = new Date(jahr2, monat2, tag2, startzeitBisStunden, startzeitBisMinuten, startzeitBisSekunden);
-        console.log("startzeitBis");
-        console.log(startzeitBis);
-
-        //speichere Wegepaar, wenn Weg2 im vorgegeben Zeitfenster zu Weg1 passt
-        if (startzeitVon < date2 < startzeitBis){
-            wegeIDVglStartzeit.push(element);
-            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Startzeit stimmt überein"});
-            console.log("Startzeit Wege innerhalb Zeitraum");
-        } else {
-            wegeIDVglWegepaareAnfang.splice(wegZaehlerX, 1,{"WegeID 1": wegeID1, "WegeID 2": wegeID2, "UserID": userID, "Kommentar": kommentar + ", Startzeit stimmt nicht überein"});
-        }
-
-         */
-
     });
 
     var mittelwertStartzeit = bildeMittelwertDate(werteStartzeit);
@@ -3215,17 +3152,6 @@ function ausgabeGrobVgl(wegeIDVglWegepaare){
 
                                     polyline = new L.Polyline(coordinateTuples, polyLineOptions).addTo(map);
                                     polylines.push(polyline);
-
-                                    /*console.log("coordinateTuples");
-                                    console.log(coordinateTuples);
-
-                                    var anzahlWeg = listGeoJson[0].features.length;
-                                    listGeoJson[0].features.splice(anzahlWeg,1,{"type":"Feature","geometry":{"type":"LineString","coordinates":coordinateTuples},"properties":{"name": anzahlWeg,"colorCode": farbe}},);
-
-                                    console.log("listGeoJson");
-                                    console.log(listGeoJson);
-
-                                     */
 
                                     // speichere Wegeinfo für Ausgabe
 
